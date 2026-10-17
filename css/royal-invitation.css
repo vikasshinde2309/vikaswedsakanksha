@@ -48,10 +48,16 @@
   padding: 1.5rem 1rem;
 }
 
-.envelope-screen.opened {
+/* Keep envelope fully visible during .opened state so the 3D flap and card rise are seen */
+.envelope-screen.fading-out {
   opacity: 0;
+  filter: blur(8px);
   visibility: hidden;
   pointer-events: none;
+}
+
+.envelope-screen.dismissed {
+  display: none !important;
 }
 
 /* Ambient Floating Dust / Bokeh on Envelope Screen */
@@ -181,8 +187,11 @@
   height: 100%;
   position: relative;
   background: #2D0813;
+  background-image: 
+    radial-gradient(circle at center, #3F121F 0%, #20050D 100%),
+    repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.04) 0px, rgba(212, 175, 55, 0.04) 2px, transparent 2px, transparent 8px);
   border-radius: 16px;
-  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.85), 0 0 50px rgba(212, 175, 55, 0.25);
   border: 2px solid rgba(212, 175, 55, 0.6);
   overflow: visible;
   cursor: pointer;
@@ -193,6 +202,7 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at center, #3F121F 0%, #20050D 100%);
+  background-image: repeating-linear-gradient(135deg, rgba(212, 175, 55, 0.03) 0px, rgba(212, 175, 55, 0.03) 2px, transparent 2px, transparent 8px);
   border-radius: 16px;
   overflow: hidden;
   z-index: 1;
@@ -264,6 +274,28 @@
   letter-spacing: 0.15em;
   color: #555;
   margin-bottom: 0.8rem;
+}
+
+/* Ethereal Golden Glow Beam on Flap Unfold */
+.envelope-glow-beam {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.3);
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(255, 235, 160, 0.95) 0%, rgba(212, 175, 55, 0.6) 35%, rgba(212, 175, 55, 0.15) 60%, transparent 75%);
+  border-radius: 50%;
+  filter: blur(20px);
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
+  z-index: 4;
+}
+
+.envelope-screen.opened .envelope-glow-beam {
+  transform: translate(-50%, -50%) scale(1.6);
+  opacity: 1;
 }
 
 /* Front Pocket of Envelope: Covers bottom 65% of letter completely */

@@ -232,11 +232,22 @@
 
     if (!envelopeScreen || !waxSeal) return;
 
-    function openEnvelope(scrollAfter = false) {
-      if (envelopeScreen.classList.contains('opened')) return;
+    function openEnvelope(instant = false) {
+      if (envelopeScreen.classList.contains('opened') || envelopeScreen.classList.contains('fading-out')) return;
 
       // 1. Play seal break sound
       weddingAudio.playWaxSealCrackSound();
+
+      if (instant) {
+        // Quick bypass if user taps "Skip"
+        envelopeScreen.classList.add('opened', 'fading-out');
+        setTimeout(() => {
+          envelopeScreen.classList.add('dismissed');
+          const hero = document.getElementById('hero') || document.getElementById('scratch');
+          if (hero) hero.scrollIntoView({ behavior: 'smooth' });
+        }, 400);
+        return;
+      }
 
       // 2. Trigger envelope 3D flap rotation & letter rise
       envelopeScreen.classList.add('opened');
@@ -247,18 +258,20 @@
       // 4. Start serene background wedding music
       setTimeout(() => {
         weddingAudio.play();
-      }, 600);
+      }, 700);
 
-      // 5. Hide overlay completely after animation completes & unlock scroll
+      // 5. Allow guest to admire the unfolding letter for 2.2 seconds, then gracefully dissolve into the website
       setTimeout(() => {
-        envelopeScreen.style.display = 'none';
-        if (scrollAfter) {
-          const hero = document.getElementById('hero') || document.getElementById('scratch');
-          if (hero) {
-            hero.scrollIntoView({ behavior: 'smooth' });
-          }
+        envelopeScreen.classList.add('fading-out');
+      }, 2200);
+
+      setTimeout(() => {
+        envelopeScreen.classList.add('dismissed');
+        const hero = document.getElementById('hero');
+        if (hero) {
+          hero.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 950);
+      }, 2900);
     }
 
     // Click triggers
@@ -314,7 +327,7 @@
         envelopeScreen.style.display = 'flex';
         // Force reflow
         void envelopeScreen.offsetWidth;
-        envelopeScreen.classList.remove('opened');
+        envelopeScreen.classList.remove('opened', 'fading-out', 'dismissed');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
@@ -401,15 +414,17 @@
       if (!isDrawing || isRevealed) return;
 
       const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
+      const clientX = e.touches && e.touches[0] ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches && e.touches[0] ? e.touches[0].clientY : e.clientY;
+      const scaleX = canvas.width / (rect.width || 1);
+      const scaleY = canvas.height / (rect.height || 1);
+      const x = (clientX - rect.left) * scaleX;
+      const y = (clientY - rect.top) * scaleY;
 
       // Erase destination pixels
       ctx.globalCompositeOperation = 'destination-out';
       ctx.beginPath();
-      ctx.arc(x, y, 32, 0, Math.PI * 2);
+      ctx.arc(x, y, 36, 0, Math.PI * 2);
       ctx.fill();
 
       // Check scratched percentage throttled
@@ -479,9 +494,10 @@
     canvas.addEventListener('mousemove', scratch);
 
     canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
       isDrawing = true;
       scratch(e);
-    }, { passive: true });
+    }, { passive: false });
 
     window.addEventListener('touchend', () => {
       if (isDrawing) {
@@ -490,7 +506,10 @@
       }
     });
 
-    canvas.addEventListener('touchmove', scratch, { passive: true });
+    canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      scratch(e);
+    }, { passive: false });
 
     // Initial paint
     resizeCanvas();
