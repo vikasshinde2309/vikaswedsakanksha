@@ -629,8 +629,7 @@
     // 3. Card tilt
     init3DCardTilt();
 
-    // 4. Floating HUD
-    init3DControllerHUD();
+    // 4. Floating HUD removed to prevent obscuring wedding metadata
   });
 
 })();
