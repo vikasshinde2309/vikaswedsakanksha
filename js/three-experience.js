@@ -587,31 +587,9 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 4. FLOATING 3D EXPERIENCE CONTROLLER PILL
+  // 4. FLOATING 3D EXPERIENCE CONTROLLER PILL (REMOVED)
   // ---------------------------------------------------------------------------
-  function init3DControllerHUD() {
-    const hud = document.createElement('div');
-    hud.className = 'hud-3d-controller';
-    hud.innerHTML = `
-      <div class="hud-3d-badge" id="hud3DToggle">
-        <span class="hud-3d-gem">💎</span>
-        <span class="hud-3d-text">3D WebGL Cinema</span>
-        <span class="hud-3d-status">Active</span>
-      </div>
-    `;
-    document.body.appendChild(hud);
 
-    const toggle = document.getElementById('hud3DToggle');
-    if (toggle) {
-      toggle.addEventListener('click', () => {
-        // Scroll smoothly to the 3D Rings Showcase in Couple section
-        const ringsEl = document.getElementById('threejsRingsBox');
-        if (ringsEl) {
-          ringsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      });
-    }
-  }
 
   // ---------------------------------------------------------------------------
   // 5. INITIALIZE ON DOM READY
