@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Options Showcase — Akanksha &amp; Vikas</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: #12100E;
+      color: #FAF7F2;
+      line-height: 1.6;
+      padding-bottom: 5rem;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(18, 16, 14, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title span {
+      color: #C5A059;
+      font-style: italic;
+    }
+
+    /* Tab Controls */
+    .tab-pills {
+      display: flex;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.3rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      gap: 0.3rem;
+    }
+
+    .tab-btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: rgba(250, 247, 242, 0.7);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn:hover {
+      color: #FFFFFF;
+    }
+
+    .tab-btn.active {
+      background: #C5A059;
+      color: #12100E;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+    }
+
+    .main-container {
+      max-width: 1280px;
+      margin: 2.5rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    /* Overview Quick Cards */
+    .overview-hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .overview-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      margin-bottom: 0.6rem;
+      color: #FAF7F2;
+    }
+    .overview-hero p {
+      color: rgba(250, 247, 242, 0.7);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .overview-card {
+      background: #181614;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+      position: relative;
+    }
+    .overview-card:hover {
+      transform: translateY(-6px);
+      border-color: #C5A059;
+      box-shadow: 0 15px 35px rgba(197, 160, 89, 0.2);
+    }
+    .overview-thumb-wrap {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: #0E0D0C;
+    }
+    .overview-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.5s ease;
+    }
+    .overview-card:hover .overview-thumb {
+      transform: scale(1.05);
+    }
+    .overview-body {
+      padding: 1.3rem 1.4rem;
+    }
+    .overview-num {
+      display: inline-block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #C5A059;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .overview-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #FAF7F2;
+    }
+    .overview-desc {
+      font-size: 0.84rem;
+      color: rgba(250, 247, 242, 0.65);
+      line-height: 1.45;
+      margin-bottom: 1rem;
+    }
+    .overview-btn {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #C5A059;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Full Visual Concept Mockup Showcase */
+    .concept-visual-showcase {
+      margin-bottom: 2.5rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #181614;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+    .concept-visual-header {
+      padding: 0.85rem 1.4rem;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.8rem;
+      color: #C5A059;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .concept-visual-img {
+      width: 100%;
+      max-height: 720px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .design-panel {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .design-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header Info */
+    .design-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
+    .design-badge {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .badge-vogue { background: rgba(250, 247, 242, 0.15); color: #FAF7F2; border: 1px solid rgba(255,255,255,0.2); }
+    .badge-royal { background: rgba(184, 134, 11, 0.2); color: #E5C158; border: 1px solid rgba(229, 193, 88, 0.4); }
+    .badge-minimal { background: rgba(255, 255, 255, 0.1); color: #E0E0E0; border: 1px solid rgba(255,255,255,0.15); }
+
+    .design-name {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 0.8rem;
+    }
+
+    .design-tagline {
+      font-size: 1.15rem;
+      opacity: 0.8;
+      font-weight: 300;
+    }
+
+    /* Live Visual Simulation Frame */
+    .mockup-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+      margin-bottom: 3.5rem;
+      position: relative;
+    }
+
+    .mockup-browser-bar {
+      background: #1E1B17;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .browser-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #FF5F56; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #27C93F; }
+
+    .browser-url {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.3rem 1rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-left: 0.5rem;
+      flex-grow: 1;
+      max-width: 380px;
+    }
+
+    /* ==========================================================================
+       STYLE 1: VOGUE EDITORIAL
+       ========================================================================== */
+    .preview-vogue {
+      background-color: #FAF7F2;
+      color: #17140F;
+      padding: 4rem 3rem;
+    }
+
+    .vogue-hero {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .vogue-meta-top {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: rgba(23, 20, 15, 0.6);
+      margin-bottom: 1.5rem;
+    }
+
+    .vogue-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      color: #17140F;
+      margin-bottom: 2rem;
+    }
+
+    .vogue-photo-spread {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      margin: 2.5rem 0;
+    }
+
+    .vogue-side-card {
+      background: #FFFFFF;
+      padding: 1.5rem;
+      border: 1px solid rgba(23, 20, 15, 0.08);
+      box-shadow: 0 4px 15px rgba(23, 20, 15, 0.04);
+      text-align: center;
+    }
+
+    .vogue-side-img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .vogue-side-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #3C1620;
+    }
+
+    .vogue-center-img-wrap {
+      border: 8px solid #FFFFFF;
+      box-shadow: 0 15px 40px rgba(23, 20, 15, 0.12);
+      position: relative;
+    }
+
+    .vogue-center-img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+    }
+
+    .vogue-quote-bar {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #3C1620;
+      text-align: center;
+      margin: 2.5rem auto 0;
+      max-width: 650px;
+      line-height: 1.6;
+      border-top: 1px solid rgba(23, 20, 15, 0.1);
+      border-bottom: 1px solid rgba(23, 20, 15, 0.1);
+      padding: 1.5rem 0;
+    }
+
+    /* ==========================================================================
+       STYLE 2: ROYAL MARATHA REGALIA
+       ========================================================================== */
+    .preview-royal {
+      background: radial-gradient(circle at center, #4A1624 0%, #2A0912 100%);
+      color: #FAF7F2;
+      padding: 4rem 3rem;
+      position: relative;
+    }
+
+    .preview-royal::before {
+      content: '';
+      position: absolute;
+      inset: 15px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      pointer-events: none;
+    }
+
+    .royal-hero {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .royal-seal {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 1.3rem;
+      color: #E5C158;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .royal-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #F8E7B4;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      margin-bottom: 0.5rem;
+    }
+
+    .royal-sub {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 1.25rem;
+      color: #D4AF37;
+      margin-bottom: 2.5rem;
+    }
+
+    .royal-triplet {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin: 2rem 0;
+    }
+
+    .royal-arch-frame {
+      border: 2px solid #D4AF37;
+      border-radius: 120px 120px 8px 8px;
+      overflow: hidden;
+      padding: 6px;
+      background: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .royal-arch-img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 114px 114px 4px 4px;
+      display: block;
+    }
+
+    .royal-gold-box {
+      background: rgba(30, 8, 14, 0.7);
+      border: 1px solid #D4AF37;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .royal-box-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      color: #D4AF37;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .royal-box-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      color: #FFFFFF;
+      margin-bottom: 0.4rem;
+    }
+
+    .royal-box-marathi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 0.95rem;
+      color: #E5C158;
+      margin-bottom: 1rem;
+    }
+
+    .royal-box-desc {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       STYLE 3: MODERN CINEMATIC MINIMAL
+       ========================================================================== */
+    .preview-minimal {
+      background-color: #0E0D0C;
+      color: #FFFFFF;
+      padding: 0;
+      position: relative;
+    }
+
+    .minimal-hero {
+      min-height: 520px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 4rem;
+      background: url('images/hero.jpg') center 20% / cover no-repeat;
+    }
+
+    .minimal-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(14, 13, 12, 0.3) 0%, rgba(14, 13, 12, 0.9) 100%);
+    }
+
+    .minimal-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .minimal-kicker {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: #C5A059;
+      margin-bottom: 1rem;
+    }
+
+    .minimal-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .minimal-meta {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 2rem;
+    }
+
+    .minimal-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 3rem 4rem;
+      background: #151413;
+    }
+
+    .minimal-card {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      background: #1C1B19;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .minimal-card-img {
+      width: 120px;
+      height: 150px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .minimal-card-info h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+
+    .minimal-card-info p {
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.4;
+    }
+
+    /* Comparison Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: #1A1816;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2rem;
+      border-radius: 12px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #C5A059;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .feature-card ul {
+      list-style: none;
+      font-size: 0.88rem;
+      color: rgba(250, 247, 242, 0.75);
+    }
+
+    .feature-card li {
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .feature-card li::before {
+      content: '✔';
+      color: #C5A059;
+    }
+
+    .action-cta {
+      text-align: center;
+      margin-top: 3.5rem;
+      padding: 3rem 2rem;
+      background: rgba(197, 160, 89, 0.08);
+      border: 1px solid rgba(197, 160, 89, 0.25);
+      border-radius: 16px;
+    }
+
+    .action-cta h3 {
+      font-size: 1.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 0.5rem;
+      color: #FAF7F2;
+    }
+
+    .action-cta p {
+      font-size: 0.95rem;
+      color: rgba(250, 247, 242, 0.7);
+      margin-bottom: 1.5rem;
+    }
+
+    .select-btn {
+      display: inline-block;
+      background: #C5A059;
+      color: #12100E;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .select-btn:hover {
+      background: #E5C158;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(197, 160, 89, 0.35);
+    }
+
+    @media (max-width: 900px) {
+      .vogue-photo-spread,
+      .royal-triplet,
+      .minimal-split,
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .tab-pills {
+        justify-content: center;
+      }
+      .preview-vogue, .preview-royal {
+        padding: 2.5rem 1.5rem;
+      }
+      .minimal-hero, .minimal-split {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Switcher Bar -->
+  <header class="top-bar">
+    <div class="brand-title">
+      Akanksha &amp; Vikas <span>· UI/UX Direction Showcase</span>
+    </div>
+
+    <nav class="tab-pills" role="tablist" aria-label="Design Directions">
+      <button class="tab-btn active" data-style="vogue" onclick="switchDesign('vogue')">
+        <span>1.</span> Vogue Editorial
+      </button>
+      <button class="tab-btn" data-style="royal" onclick="switchDesign('royal')">
+        <span>2.</span> Royal Maratha Regalia
+      </button>
+      <button class="tab-btn" data-style="minimal" onclick="switchDesign('minimal')">
+        <span>3.</span> Cinematic Minimalist
+      </button>
+    </nav>
+  </header>
+
+  <main class="main-container">
+
+    <!-- Quick Comparison Header -->
+    <div class="overview-hero">
+      <span class="design-badge" style="background: rgba(197, 160, 89, 0.2); color: #E5C158; border: 1px solid rgba(197, 160, 89, 0.4);">UI/UX Directions Showcase</span>
+      <h1>Compare the 3 Design Styles</h1>
+      <p>Click on any card below to jump directly to its full art direction mockup and interactive prototype featuring Akanksha &amp; Vikas's actual photography.</p>
+    </div>
+
+    <!-- 3 Quick Comparison Cards -->
+    <div class="overview-grid">
+      <div class="overview-card" onclick="switchDesign('vogue')">
+        <div class="overview-thumb-wrap">
+          <img src="images/vogue_editorial_ui_1792229437995.jpg" alt="Vogue Haute Couture" class="overview-thumb">
+        </div>
+        <div class="overview-body">
+          <span class="overview-num">Option 1 · Current Favorite</span>
+          <h3 class="overview-title">Vogue Editorial</h3>
+          <p class="overview-desc">Warm cream canvas (#FAF7F2), bold high-fashion typography, asymmetric magazine spread &amp; Polaroid moments.</p>
+          <span class="overview-btn">Explore Direction 1 &rarr;</span>
+        </div>
+      </div>
+
+      <div class="overview-card" onclick="switchDesign('royal')">
+        <div class="overview-thumb-wrap">
+          <img src="images/royal_heritage_ui_1792229462368.jpg" alt="Royal Maratha Regalia" class="overview-thumb">
+        </div>
+        <div class="overview-body">
+          <span class="overview-num" style="color: #E5C158;">Option 2 · Heritage</span>
+          <h3 class="overview-title">Royal Maratha Regalia</h3>
+          <p class="overview-desc">Deep burgundy velvet (#3C1620), antique gold foil (#D4AF37), traditional palace arches &amp; regal shlokas.</p>
+          <span class="overview-btn" style="color: #E5C158;">Explore Direction 2 &rarr;</span>
+        </div>
+      </div>
+
+      <div class="overview-card" onclick="switchDesign('minimal')">
+        <div class="overview-thumb-wrap">
+          <img src="images/cinematic_minimal_ui_1792229483791.jpg" alt="Cinematic Minimalist" class="overview-thumb">
+        </div>
+        <div class="overview-body">
+          <span class="overview-num">Option 3 · Modern Luxury</span>
+          <h3 class="overview-title">Cinematic Minimalist</h3>
+          <p class="overview-desc">Deep noir charcoal (#0E0D0C), champagne gold, full-bleed couple photography &amp; razor-sharp quiet luxury.</p>
+          <span class="overview-btn">Explore Direction 3 &rarr;</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         PANEL 1: VOGUE EDITORIAL
+         ==================================================================== -->
+    <section id="panel-vogue" class="design-panel active" aria-label="Option 1: Vogue Editorial">
+      <div class="design-intro">
+        <span class="design-badge badge-vogue">Direction 1 · Current Favorite</span>
+        <h2 class="design-name">The Vogue Haute Couture Journal</h2>
+        <p class="design-tagline">
+          Warm cream paper canvas, deep black ink typography, asymmetric magazine editorial spread, and Polaroid-inspired memories.
+        </p>
+      </div>
+
+      <!-- Visual Concept Mockup Render -->
+      <div class="concept-visual-showcase">
+        <div class="concept-visual-header">
+          <span>Art Direction Concept Render · Vogue Editorial</span>
+          <span>Curated Haute Couture Spread</span>
+        </div>
+        <img src="images/vogue_editorial_ui_1792229437995.jpg" alt="Vogue Editorial Visual Mockup" class="concept-visual-img">
+      </div>
+
+      <!-- Live Interactive Prototype with Real Photos -->
+      <div class="mockup-frame">
+        <div class="mockup-browser-bar">
+          <span class="browser-dot dot-red"></span>
+          <span class="browser-dot dot-yellow"></span>
+          <span class="browser-dot dot-green"></span>
+          <span class="browser-url">Interactive Prototype (Real Photos) · https://akanksha-vikas.wedding/vogue-editorial</span>
+        </div>
+
+        <div class="preview-vogue">
+          <div class="vogue-hero">
+            <p class="vogue-meta-top">Issue No. 01 — 26 · 11 · 2026 — Vani, Roha, Raigad</p>
+            <h1 class="vogue-title">Akanksha &amp; Vikas</h1>
+
+            <div class="vogue-photo-spread">
+              <!-- Bride Side -->
+              <div class="vogue-side-card">
+                <img src="images/bride.jpg" alt="Akanksha" class="vogue-side-img">
+                <h4 class="vogue-side-caption">The Bride</h4>
+                <p style="font-size: 0.8rem; opacity: 0.7;">Akanksha Arvind Kadam</p>
+              </div>
+
+              <!-- Center Main Couple Photo -->
+              <div class="vogue-center-img-wrap">
+                <img src="images/hero.jpg" alt="Akanksha &amp; Vikas Sunset" class="vogue-center-img">
+              </div>
+
+              <!-- Groom Side -->
+              <div class="vogue-side-card">
+                <img src="images/groom.jpg" alt="Vikas" class="vogue-side-img">
+                <h4 class="vogue-side-caption">The Groom</h4>
+                <p style="font-size: 0.8rem; opacity: 0.7;">Vikas Shahaji Shinde</p>
+              </div>
+            </div>
+
+            <blockquote class="vogue-quote-bar font-devanagari">
+              ॥ दोन जीवांच्या या पवित्र मिलनाला । श्रीकृपेची साथ लाभो जन्मोजन्मी ॥
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+      <!-- Details & Characteristics -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Palette &amp; Texture</h3>
+          <ul>
+            <li>Cream Paper background (<code>#FAF7F2</code>)</li>
+            <li>Charcoal Black ink typography (<code>#17140F</code>)</li>
+            <li>Deep Bordeaux Wine accents (<code>#3C1620</code>)</li>
+            <li>Matte paper photo borders with soft drop shadows</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3>Typography System</h3>
+          <ul>
+            <li>Display: <strong>Bricolage Grotesque</strong> (Bold &amp; wide)</li>
+            <li>Serif: <strong>Cormorant Garamond</strong> (Editorial grace)</li>
+            <li>Accent: <strong>Fraunces</strong> &amp; <strong>Caveat</strong> (Handwritten notes)</li>
+            <li>Traditional: <strong>Noto Serif Devanagari</strong></li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3>Feel &amp; User Experience</h3>
+          <ul>
+            <li>Feels like reading a luxury Vogue wedding feature</li>
+            <li>Smooth weighted scrolling with Lenis</li>
+            <li>Magnetic cursor interactive RSVP button</li>
+            <li>Horizontal timeline gallery converting to vertical on mobile</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-cta">
+        <h3>Love the Vogue Editorial Look?</h3>
+        <p>This is the current baseline design we've built, refined with zero photo stretching and dedicated bride/groom cards.</p>
+        <button class="select-btn" onclick="alert('You selected Vogue Editorial! Tell the assistant in chat to finalize this style.')">Confirm Direction 1</button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PANEL 2: ROYAL MARATHA REGALIA
+         ==================================================================== -->
+    <section id="panel-royal" class="design-panel" aria-label="Option 2: Royal Maratha Regalia">
+      <div class="design-intro">
+        <span class="design-badge badge-royal">Direction 2 · Royal Heritage</span>
+        <h2 class="design-name" style="color: #F8E7B4;">Royal Maratha Regalia</h2>
+        <p class="design-tagline" style="color: #D4AF37;">
+          Opulent deep burgundy velvet, antique gold foil filigree, regal palace arches, and traditional Devanagari calligraphy.
+        </p>
+      </div>
+
+      <!-- Visual Concept Mockup Render -->
+      <div class="concept-visual-showcase" style="border-color: rgba(212, 175, 55, 0.35);">
+        <div class="concept-visual-header" style="color: #E5C158;">
+          <span>Art Direction Concept Render · Royal Maratha Regalia</span>
+          <span>Palace Velvet &amp; Gold Foil Regalia</span>
+        </div>
+        <img src="images/royal_heritage_ui_1792229462368.jpg" alt="Royal Maratha Regalia Visual Mockup" class="concept-visual-img">
+      </div>
+
+      <!-- Live Interactive Prototype with Real Photos -->
+      <div class="mockup-frame">
+        <div class="mockup-browser-bar">
+          <span class="browser-dot dot-red"></span>
+          <span class="browser-dot dot-yellow"></span>
+          <span class="browser-dot dot-green"></span>
+          <span class="browser-url">Interactive Prototype (Real Photos) · https://akanksha-vikas.wedding/royal-maratha</span>
+        </div>
+
+        <div class="preview-royal">
+          <div class="royal-hero">
+            <p class="royal-seal">॥ श्री कुलदैवत प्रसन्न · कदम 卐 शिंदे ॥</p>
+            <h1 class="royal-title">Akanksha &amp; Vikas</h1>
+            <p class="royal-sub">शुभविवाह सोहळा — २६ नोव्हेंबर २०२६ · रोहा, रायगड</p>
+
+            <div class="royal-triplet">
+              <!-- Bride Arch Card -->
+              <div class="royal-gold-box">
+                <div class="royal-arch-frame" style="margin-bottom: 1rem;">
+                  <img src="images/bride.jpg" alt="Akanksha" class="royal-arch-img">
+                </div>
+                <p class="royal-box-label">वधू</p>
+                <h4 class="royal-box-name">Akanksha</h4>
+                <p class="royal-box-marathi">चि.सौ.कां. आकांक्षा अरविंद कदम</p>
+                <p class="royal-box-desc">मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड</p>
+              </div>
+
+              <!-- Main Center Arch (Couple) -->
+              <div class="royal-arch-frame" style="border-width: 3px; box-shadow: 0 15px 45px rgba(212,175,55,0.25);">
+                <img src="images/hero.jpg" alt="Akanksha &amp; Vikas" class="royal-arch-img" style="aspect-ratio: 3 / 4;">
+              </div>
+
+              <!-- Groom Arch Card -->
+              <div class="royal-gold-box">
+                <div class="royal-arch-frame" style="margin-bottom: 1rem;">
+                  <img src="images/groom.jpg" alt="Vikas" class="royal-arch-img">
+                </div>
+                <p class="royal-box-label">वर</p>
+                <h4 class="royal-box-name">Vikas</h4>
+                <p class="royal-box-marathi">चि. विकास शहाजी शिंदे</p>
+                <p class="royal-box-desc">मु. मणकर्णवाडी, पो. पिंपरी, ता. माण, जि. सातारा</p>
+              </div>
+            </div>
+
+            <p style="color: #F8E7B4; font-family: 'Cinzel', serif; letter-spacing: 0.15em; font-size: 0.95rem; margin-top: 2rem;">
+              THURSDAY, 26TH NOVEMBER 2026 · SHUBH MUHURAT AT 1:05 PM
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Details & Characteristics -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Palette &amp; Texture</h3>
+          <ul>
+            <li>Deep Royal Burgundy Velvet (<code>#3C1620</code> / <code>#2A0912</code>)</li>
+            <li>Warm Antique Gold Foil (<code>#D4AF37</code> / <code>#E5C158</code>)</li>
+            <li>Ivory Raw Silk highlights (<code>#FAF7F2</code>)</li>
+            <li>Gold filigree border motifs &amp; palace arch frames</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3>Typography System</h3>
+          <ul>
+            <li>Display: <strong>Cinzel</strong> (Imperial classical roman)</li>
+            <li>Serif: <strong>Rozha One</strong> &amp; <strong>Cormorant</strong></li>
+            <li>Devanagari: <strong>Noto Serif Devanagari</strong></li>
+            <li>Gold embossed text shadows</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3>Feel &amp; User Experience</h3>
+          <ul>
+            <li>Feels like an official royal palace wedding invitation</li>
+            <li>Rich ceremonial grandeur celebrating Kadam &amp; Shinde roots</li>
+            <li>Traditional Mangalacharan shlokas prominently honored</li>
+            <li>Warm ambient candlelit visual warmth</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-cta" style="background: rgba(212, 175, 55, 0.1); border-color: rgba(212, 175, 55, 0.4);">
+        <h3 style="color: #F8E7B4;">Love the Royal Maratha Heritage Look?</h3>
+        <p>We can transform the site into an opulent royal palace aesthetic with gold foil arches, rich burgundy velvet, and traditional regal borders.</p>
+        <button class="select-btn" onclick="alert('You selected Royal Maratha Regalia! Tell the assistant in chat to apply this style.')">Confirm Direction 2</button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PANEL 3: CINEMATIC MINIMALIST
+         ==================================================================== -->
+    <section id="panel-minimal" class="design-panel" aria-label="Option 3: Cinematic Minimalist">
+      <div class="design-intro">
+        <span class="design-badge badge-minimal">Direction 3 · Modern Luxury</span>
+        <h2 class="design-name">Modern Cinematic Minimalist</h2>
+        <p class="design-tagline">
+          Full-bleed atmospheric photography, dark charcoal &amp; sand palette, razor-thin borders, and Celine / Bottega Veneta quiet luxury.
+        </p>
+      </div>
+
+      <!-- Visual Concept Mockup Render -->
+      <div class="concept-visual-showcase">
+        <div class="concept-visual-header">
+          <span>Art Direction Concept Render · Modern Cinematic Minimalist</span>
+          <span>Quiet Luxury &amp; Full-Bleed Film Aesthetic</span>
+        </div>
+        <img src="images/cinematic_minimal_ui_1792229483791.jpg" alt="Cinematic Minimalist Visual Mockup" class="concept-visual-img">
+      </div>
+
+      <!-- Live Interactive Prototype with Real Photos -->
+      <div class="mockup-frame">
+        <div class="mockup-browser-bar">
+          <span class="browser-dot dot-red"></span>
+          <span class="browser-dot dot-yellow"></span>
+          <span class="browser-dot dot-green"></span>
+          <span class="browser-url">Interactive Prototype (Real Photos) · https://akanksha-vikas.wedding/cinematic-minimal</span>
+        </div>
+
+        <div class="preview-minimal">
+          <div class="minimal-hero">
+            <div class="minimal-content">
+              <p class="minimal-kicker">A Bespoke Celebration · 26.11.2026</p>
+              <h1 class="minimal-name">Akanksha &amp; Vikas</h1>
+              <p class="minimal-meta">Vani, Roha, Raigad — Maharashtra</p>
+            </div>
+          </div>
+
+          <!-- Split Profiles -->
+          <div class="minimal-split">
+            <div class="minimal-card">
+              <img src="images/bride.jpg" alt="Akanksha" class="minimal-card-img">
+              <div class="minimal-card-info">
+                <h4>Akanksha Kadam</h4>
+                <p>The Bride · Elder Daughter of Kadam Family</p>
+                <p style="margin-top: 0.5rem; font-size: 0.75rem; color: #C5A059;">Vani, Roha (Raigad)</p>
+              </div>
+            </div>
+
+            <div class="minimal-card">
+              <img src="images/groom.jpg" alt="Vikas" class="minimal-card-img">
+              <div class="minimal-card-info">
+                <h4>Vikas Shinde</h4>
+                <p>The Groom · Son of Shinde Family</p>
+                <p style="margin-top: 0.5rem; font-size: 0.75rem; color: #C5A059;">Mankarwadi, Man (Satara)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Details & Characteristics -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Palette &amp; Texture</h3>
+          <ul>
+            <li>Deep Noir Charcoal (<code>#0E0D0C</code>)</li>
+            <li>Warm Sand Gray (<code>#1C1B19</code>)</li>
+            <li>Brushed Champagne Gold (<code>#C5A059</code>)</li>
+            <li>Full-bleed photography with subtle cinematic vignette</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3>Typography System</h3>
+          <ul>
+            <li>Headlines: Ultra-light <strong>Cormorant Garamond</strong></li>
+            <li>Subtext: Wide-spaced <strong>Inter</strong> uppercase (300 weight)</li>
+            <li>Accents: Refined hairline rules and modern numerics</li>
+            <li>Focus purely on the photographic emotion</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3>Feel &amp; User Experience</h3>
+          <ul>
+            <li>Feels like a luxury film trailer / fashion lookbook</li>
+            <li>Maximum photographic focus with zero visual clutter</li>
+            <li>Smooth Ken Burns panning animations on hero photo</li>
+            <li>High-end contemporary gallery and modern typography</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-cta">
+        <h3>Love the Cinematic Minimalist Look?</h3>
+        <p>We can style the entire website with deep moody charcoal, full-bleed couple photography, and ultra-sleek high-fashion typography.</p>
+        <button class="select-btn" onclick="alert('You selected Cinematic Minimalist! Tell the assistant in chat to apply this style.')">Confirm Direction 3</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function switchDesign(style) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-style') === style) {
+          btn.classList.add('active');
+        }
+      });
+
+      document.querySelectorAll('.design-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+
+      const target = document.getElementById('panel-' + style);
+      if (target) {
+        target.classList.add('active');
+        // Smooth scroll to target with offset for sticky header
+        const headerOffset = 90;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  </script>
+</body>
+</html>
