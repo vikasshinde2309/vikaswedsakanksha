@@ -14,149 +14,67 @@
   'use strict';
 
   // ---------------------------------------------------------------------------
-  // 1. Procedural Web Audio API Wedding Music Synthesizer
+  // 1. Romantic Violin BGM Engine ("Ek Aisa Woh Jahan Tha" Heart-Touching Theme)
   // ---------------------------------------------------------------------------
   class WeddingAudioEngine {
     constructor() {
       this.ctx = null;
       this.isPlaying = false;
       this.masterGain = null;
-      this.droneOsc1 = null;
-      this.droneOsc2 = null;
-      this.droneGain = null;
-      this.melodyInterval = null;
-      this.externalAudio = document.getElementById('weddingBgm');
-
-      // Pentatonic Indian classical notes (Raag Bhupali / Yaman base C#)
-      // C#4, D#4, F4, G#4, A#4, C#5
-      this.notes = [277.18, 311.13, 369.99, 415.30, 466.16, 554.37];
+      this.externalAudio = null;
+      this.fadeInterval = null;
+      this.targetVolume = 0.42; // Gentle, soothing ambient level
+      this.playbackRate = 0.92; // Serene, slow romantic violin cadence
+      this.hasBoundUserGesture = false;
     }
 
     init() {
+      if (!this.externalAudio) {
+        this.externalAudio = document.getElementById('weddingBgm');
+      }
+
+      if (this.externalAudio) {
+        try {
+          this.externalAudio.playbackRate = this.playbackRate;
+          this.externalAudio.preservesPitch = true;
+          this.externalAudio.loop = true;
+        } catch (e) {}
+      }
+
       if (!this.ctx) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        this.ctx = new AudioContext();
-        this.masterGain = this.ctx.createGain();
-        this.masterGain.gain.setValueAtTime(0.01, this.ctx.currentTime);
-        this.masterGain.connect(this.ctx.destination);
-      }
-      if (this.ctx.state === 'suspended') {
-        this.ctx.resume();
-      }
-    }
-
-    startDrone() {
-      if (!this.ctx || this.droneOsc1) return;
-
-      this.droneGain = this.ctx.createGain();
-      this.droneGain.gain.setValueAtTime(0.12, this.ctx.currentTime);
-      this.droneGain.connect(this.masterGain);
-
-      // Root Sa drone (C#3)
-      this.droneOsc1 = this.ctx.createOscillator();
-      this.droneOsc1.type = 'sawtooth';
-      this.droneOsc1.frequency.setValueAtTime(138.59, this.ctx.currentTime);
-
-      // Low pass filter to make drone warm and meditative
-      const filter = this.ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(320, this.ctx.currentTime);
-
-      this.droneOsc1.connect(filter);
-      filter.connect(this.droneGain);
-      this.droneOsc1.start();
-
-      // Fifth Pa drone (G#3)
-      this.droneOsc2 = this.ctx.createOscillator();
-      this.droneOsc2.type = 'sine';
-      this.droneOsc2.frequency.setValueAtTime(207.65, this.ctx.currentTime);
-      this.droneOsc2.connect(filter);
-      this.droneOsc2.start();
-    }
-
-    playFluteNote(freq, duration = 1.4) {
-      if (!this.ctx || !this.isPlaying) return;
-
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      const filter = this.ctx.createBiquadFilter();
-
-      // Warm breathy flute timbre
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-
-      // Soft vibrato
-      const vibrato = this.ctx.createOscillator();
-      const vibratoGain = this.ctx.createGain();
-      vibrato.frequency.setValueAtTime(5.5, this.ctx.currentTime);
-      vibratoGain.gain.setValueAtTime(freq * 0.015, this.ctx.currentTime);
-      vibrato.connect(osc.frequency);
-      vibrato.start();
-
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(1200, this.ctx.currentTime);
-
-      // Flute envelope
-      const now = this.ctx.currentTime;
-      gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.18, now + 0.3);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(this.masterGain);
-
-      osc.start(now);
-      osc.stop(now + duration + 0.1);
-      vibrato.stop(now + duration + 0.1);
-    }
-
-    playMelodyPhrase() {
-      // Traditional ascending and descending devotional phrases
-      const phrase = [
-        { note: this.notes[0], duration: 1.2 },
-        { note: this.notes[1], duration: 1.0 },
-        { note: this.notes[2], duration: 1.5 },
-        { note: this.notes[3], duration: 1.8 },
-        { note: this.notes[2], duration: 1.1 },
-        { note: this.notes[4], duration: 2.0 },
-        { note: this.notes[5], duration: 2.2 },
-        { note: this.notes[3], duration: 1.6 },
-        { note: this.notes[2], duration: 1.4 },
-        { note: this.notes[1], duration: 1.2 },
-        { note: this.notes[0], duration: 3.0 },
-      ];
-
-      let delay = 0;
-      phrase.forEach(step => {
-        setTimeout(() => {
-          if (this.isPlaying) {
-            this.playFluteNote(step.note, step.duration);
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
           }
-        }, delay * 1000);
-        delay += step.duration * 0.85;
-      });
+        } catch (e) {}
+      }
+
+      if (this.ctx && this.ctx.state === 'suspended') {
+        this.ctx.resume().catch(() => {});
+      }
     }
 
     playWaxSealCrackSound() {
-      this.init();
-      const now = this.ctx.currentTime;
-      
-      // Chime / bell sound
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(880, now);
-      osc.frequency.exponentialRampToValueAtTime(1760, now + 0.1);
-      osc.frequency.exponentialRampToValueAtTime(440, now + 0.8);
+      try {
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(880, now);
+        osc.frequency.exponentialRampToValueAtTime(1760, now + 0.1);
+        osc.frequency.exponentialRampToValueAtTime(440, now + 0.8);
 
-      gain.gain.setValueAtTime(0.3, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+        gain.gain.setValueAtTime(0.22, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
 
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.85);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.85);
+      } catch (e) {}
     }
 
     toggle() {
@@ -167,41 +85,92 @@
       }
     }
 
+    fadeIn() {
+      if (!this.externalAudio) return;
+      clearInterval(this.fadeInterval);
+      const step = 0.025;
+      this.fadeInterval = setInterval(() => {
+        if (!this.externalAudio || !this.isPlaying) {
+          clearInterval(this.fadeInterval);
+          return;
+        }
+        if (this.externalAudio.volume < this.targetVolume - step) {
+          this.externalAudio.volume = Math.min(this.targetVolume, this.externalAudio.volume + step);
+        } else {
+          this.externalAudio.volume = this.targetVolume;
+          clearInterval(this.fadeInterval);
+        }
+      }, 70);
+    }
+
+    fadeOut(onComplete) {
+      if (!this.externalAudio) {
+        if (onComplete) onComplete();
+        return;
+      }
+      clearInterval(this.fadeInterval);
+      const step = 0.04;
+      this.fadeInterval = setInterval(() => {
+        if (!this.externalAudio) {
+          clearInterval(this.fadeInterval);
+          if (onComplete) onComplete();
+          return;
+        }
+        if (this.externalAudio.volume > step) {
+          this.externalAudio.volume = Math.max(0, this.externalAudio.volume - step);
+        } else {
+          this.externalAudio.volume = 0;
+          this.externalAudio.pause();
+          clearInterval(this.fadeInterval);
+          if (onComplete) onComplete();
+        }
+      }, 50);
+    }
+
     play() {
       this.init();
       this.isPlaying = true;
-
-      // If external mp3 file is available and playable, use it
-      if (this.externalAudio && this.externalAudio.src && !this.externalAudio.error) {
-        this.externalAudio.play().catch(() => {
-          this.startDrone();
-          this.playMelodyPhrase();
-        });
-      } else {
-        // Fall back to pure procedural synthesis
-        this.startDrone();
-        this.playMelodyPhrase();
-        this.melodyInterval = setInterval(() => {
-          if (this.isPlaying) this.playMelodyPhrase();
-        }, 18000);
-      }
-
-      this.masterGain.gain.linearRampToValueAtTime(0.35, this.ctx.currentTime + 1.5);
       this.updateUI(true);
+
+      if (this.externalAudio) {
+        this.externalAudio.playbackRate = this.playbackRate;
+        try {
+          this.externalAudio.preservesPitch = true;
+        } catch (e) {}
+
+        this.externalAudio.volume = 0.01;
+        const playPromise = this.externalAudio.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              this.fadeIn();
+            })
+            .catch(() => {
+              // Browser autoplay policy restricted audio; arm one-time touch/click handler
+              if (!this.hasBoundUserGesture) {
+                this.hasBoundUserGesture = true;
+                const resumeMusic = () => {
+                  if (this.isPlaying && this.externalAudio && this.externalAudio.paused) {
+                    this.externalAudio.play().then(() => this.fadeIn()).catch(() => {});
+                  }
+                  window.removeEventListener('click', resumeMusic);
+                  window.removeEventListener('touchstart', resumeMusic);
+                  window.removeEventListener('scroll', resumeMusic);
+                };
+                window.addEventListener('click', resumeMusic, { once: true, passive: true });
+                window.addEventListener('touchstart', resumeMusic, { once: true, passive: true });
+                window.addEventListener('scroll', resumeMusic, { once: true, passive: true });
+              }
+            });
+        }
+      }
     }
 
     stop() {
       this.isPlaying = false;
-      if (this.externalAudio) {
-        this.externalAudio.pause();
-      }
-      if (this.melodyInterval) {
-        clearInterval(this.melodyInterval);
-      }
-      if (this.masterGain && this.ctx) {
-        this.masterGain.gain.linearRampToValueAtTime(0.001, this.ctx.currentTime + 0.5);
-      }
       this.updateUI(false);
+      this.fadeOut();
     }
 
     updateUI(active) {

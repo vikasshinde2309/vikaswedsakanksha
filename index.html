@@ -33,8 +33,8 @@
   <meta http-equiv="Expires" content="0">
 
   <!-- Main Stylesheets (with Cache-Busting Version) -->
-  <link rel="stylesheet" href="css/style.css?v=3.0">
-  <link rel="stylesheet" href="css/royal-invitation.css?v=3.0">
+  <link rel="stylesheet" href="css/style.css?v=3.1">
+  <link rel="stylesheet" href="css/royal-invitation.css?v=3.1">
 
   <!-- GSAP 3 & ScrollTrigger -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -45,11 +45,11 @@
 
   <!-- Three.js 3D WebGL Engine -->
   <script src="js/three.min.js"></script>
-  <script src="js/three-experience.js?v=3.0" defer></script>
+  <script src="js/three-experience.js?v=3.1" defer></script>
 
   <!-- Application Scripts -->
-  <script src="js/main.js?v=3.0" defer></script>
-  <script src="js/royal-interactive.js?v=3.0" defer></script>
+  <script src="js/main.js?v=3.1" defer></script>
+  <script src="js/royal-interactive.js?v=3.1" defer></script>
 </head>
 <body class="page-body">
 
@@ -135,8 +135,13 @@
     </div>
   </div>
 
+  <!-- Romantic Violin Background Music (Ek Aisa Woh Jahan Tha) -->
+  <audio id="weddingBgm" loop preload="auto" playsinline>
+    <source src="audio/violin-tune-ek-aisa-woh-jahan-tha.mp3" type="audio/mpeg">
+  </audio>
+
   <!-- Floating Audio / Soundwave Toggle Button -->
-  <button type="button" id="audioToggleBtn" class="audio-controller-btn" aria-label="संगीत चालू / बंद करा">
+  <button type="button" id="audioToggleBtn" class="audio-controller-btn" aria-label="संगीत चालू / बंद करा" title="Violin Theme · Ek Aisa Woh Jahan Tha">
     <div class="soundwave-bars">
       <span></span>
       <span></span>
