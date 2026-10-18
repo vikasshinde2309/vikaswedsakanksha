@@ -1642,14 +1642,17 @@
   height: 112%;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #0E050A;
   opacity: 0;
+  z-index: 1;
   transform: scale(1.0);
-  transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, opacity;
 }
 
 .hero-slide.active {
   opacity: 1;
+  z-index: 2;
   animation: kenBurnsZoom 16s infinite alternate ease-in-out;
 }
 
