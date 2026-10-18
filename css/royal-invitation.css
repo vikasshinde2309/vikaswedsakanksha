@@ -1736,6 +1736,36 @@
   .scratch-card-box {
     min-height: 420px !important;
   }
+
+  /* Single-row 4-column balanced countdown on mobile phones */
+  .countdown-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.45rem !important;
+    width: 100% !important;
+    max-width: 390px !important;
+    padding: 0 0.4rem !important;
+  }
+
+  .countdown-pill {
+    min-width: 0 !important;
+    padding: 0.75rem 0.25rem !important;
+    border-radius: 12px !important;
+  }
+
+  .countdown-number {
+    font-size: clamp(1.35rem, 5.8vw, 1.75rem) !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .countdown-label-marathi {
+    font-size: 0.72rem !important;
+  }
+
+  .countdown-label-en {
+    font-size: 0.5rem !important;
+    letter-spacing: 0.06em !important;
+  }
 }
 
 
