@@ -228,9 +228,12 @@
         envelopeScreen.classList.add('opened', 'fading-out');
         setTimeout(() => {
           envelopeScreen.classList.add('dismissed');
+          if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+          }
           const hero = document.getElementById('hero') || document.getElementById('scratch');
           if (hero) hero.scrollIntoView({ behavior: 'smooth' });
-        }, 350);
+        }, 300);
         return;
       }
 
@@ -253,15 +256,19 @@
         envelopeScreen.classList.remove('seal-pressed');
         envelopeScreen.classList.add('opened');
 
+        if (skipBtn) {
+          skipBtn.style.display = 'none';
+        }
+
         // Confetti burst on flap reveal
-        launchConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.42);
+        launchConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.38);
 
         // Soft music player start
         setTimeout(() => {
           weddingAudio.play();
-        }, 600);
+        }, 500);
 
-        // State 4 & 5: Card & typography reveal complete at ~1.8s
+        // State 4 & 5: Card & typography reveal complete at 1.1s
         setTimeout(() => {
           isFullyOpened = true;
           isAnimating = false;
@@ -277,19 +284,22 @@
           if (replayBtn) {
             replayBtn.style.display = 'inline-flex';
           }
-        }, 1800);
-      }, 220);
+        }, 1100);
+      }, 160);
     }
 
     function enterWebsite() {
       envelopeScreen.classList.add('fading-out');
       setTimeout(() => {
         envelopeScreen.classList.add('dismissed');
-        const hero = document.getElementById('hero') || document.getElementById('scratch');
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
+        const hero = document.getElementById('hero') || document.getElementById('couple');
         if (hero) {
           hero.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 700);
+      }, 550);
     }
 
     function resetEnvelope() {
@@ -299,10 +309,13 @@
       void envelopeScreen.offsetWidth; // force reflow
       envelopeScreen.classList.remove('opened', 'seal-pressed', 'invitation-revealed', 'fading-out', 'dismissed');
 
+      if (skipBtn) {
+        skipBtn.style.display = '';
+      }
       if (openBtn) {
         const btnText = openBtn.querySelector('.btn-text') || openBtn.querySelector('span');
         if (btnText) {
-          btnText.textContent = '✨ निमंत्रण उघडा (Open Invitation)';
+          btnText.textContent = '✨ लग्नपत्रिका उघडा (Open Invitation)';
         }
         openBtn.classList.remove('pulse-enter');
       }
@@ -556,6 +569,8 @@
     function revealEntireCard() {
       if (isRevealed) return;
       isRevealed = true;
+      const directRevealBtn = document.getElementById('btnDirectRevealMuhurat');
+      if (directRevealBtn) directRevealBtn.style.display = 'none';
 
       // Play soft celebratory chime
       weddingAudio.playWaxSealCrackSound();
@@ -604,6 +619,16 @@
       e.preventDefault();
       scratch(e);
     }, { passive: false });
+
+    // Direct Reveal Button for Mobile Accessibility
+    const directRevealBtn = document.getElementById('btnDirectRevealMuhurat');
+    if (directRevealBtn) {
+      directRevealBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        revealEntireCard();
+        directRevealBtn.style.display = 'none';
+      });
+    }
 
     // Initial paint
     resizeCanvas();

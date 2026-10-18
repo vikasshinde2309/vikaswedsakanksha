@@ -402,6 +402,24 @@
       return;
     }
 
+    // Fail-safe IntersectionObserver ensures content is never trapped in opacity: 0
+    if ('IntersectionObserver' in window) {
+      const fallbackObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'none';
+              fallbackObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealElements.forEach((el) => fallbackObserver.observe(el));
+    }
+
     // Group reveals by parent container to stagger sibling cards/grids automatically
     const processedContainers = new Set();
 
@@ -626,6 +644,42 @@
     const rsvpBtn = document.querySelector('#rsvp-btn, .rsvp-trigger, .rsvp-btn, [data-action="rsvp"]');
     const rsvpFormContainer = document.querySelector('.rsvp-form, #rsvp-form-container, .rsvp-form-wrapper');
     const form = document.querySelector('#rsvp-form, .rsvp-form form') || (rsvpFormContainer && rsvpFormContainer.tagName === 'FORM' ? rsvpFormContainer : null);
+    const savedStatusEl = document.getElementById('rsvpSavedStatus');
+
+    // 1. Check local persistence on startup
+    const STORAGE_KEY = 'akanksha_vikas_wedding_rsvp';
+    try {
+      const existingData = localStorage.getItem(STORAGE_KEY);
+      if (existingData) {
+        const saved = JSON.parse(existingData);
+        if (saved && saved.name && savedStatusEl) {
+          savedStatusEl.style.display = 'block';
+          const attendanceMarathi = saved.attendance === 'accept' ? 'सहर्ष उपस्थित राहणार (Attending)' : 'क्षमस्व, उपस्थित राहता येणार नाही (Regretfully Decline)';
+          savedStatusEl.innerHTML = `
+            <div style="font-size: 1.3rem; margin-bottom: 0.35rem;">✓</div>
+            <strong>आपली उपस्थिती नोंदवलेली आहे (RSVP Confirmed):</strong><br>
+            <span style="color: #3C1620; font-weight: 700;">${saved.name}</span> · ${attendanceMarathi} · ${saved.guests} व्यक्ती (Guest/s)<br>
+            <span style="font-size: 0.8em; opacity: 0.8; margin-top: 0.3rem; display: inline-block;">
+              नोंदणी दिनांक: ${new Date(saved.timestamp || Date.now()).toLocaleDateString('mr-IN')} · आपण खाली बदल करू शकता
+            </span>
+          `;
+
+          // Prefill inputs
+          const nameInp = document.getElementById('rsvpName');
+          const emailInp = document.getElementById('rsvpEmail');
+          const guestsInp = document.getElementById('rsvpGuests');
+          const dietaryInp = document.getElementById('rsvpDietary');
+          if (nameInp) nameInp.value = saved.name || '';
+          if (emailInp) emailInp.value = saved.email || '';
+          if (guestsInp) guestsInp.value = saved.guests || '1';
+          if (dietaryInp) dietaryInp.value = saved.dietary || '';
+          const rad = document.querySelector(`input[name="attendance"][value="${saved.attendance}"]`);
+          if (rad) rad.checked = true;
+        }
+      }
+    } catch (e) {
+      console.warn('Could not read existing RSVP from localStorage:', e);
+    }
 
     // Initial button click to show form
     if (rsvpBtn && rsvpFormContainer) {
@@ -669,7 +723,7 @@
       });
     }
 
-    // Form submission handling
+    // Form submission handling with STRICT PERSISTENCE
     const activeForm = form || document.querySelector('form.rsvp');
     if (activeForm) {
       activeForm.addEventListener('submit', (e) => {
@@ -682,22 +736,92 @@
           data[key] = value;
         });
 
-        console.log('🎉 RSVP Submission Received:', data);
+        const name = (data.name || '').trim();
+        const email = (data.email || '').trim();
+        const attendance = data.attendance || 'accept';
+        const guests = data.guests || '1';
+        const dietary = (data.dietary || '').trim();
 
-        // Prepare Thank You state
-        const guestName = data.name || data.fullname || data.guestName || 'Dear Guest';
+        // Strict Validation
+        if (!name) {
+          alert('कृपया आपले पूर्ण नाव प्रविष्ट करा (Please enter your full name).');
+          const nameInput = document.getElementById('rsvpName');
+          if (nameInput) nameInput.focus();
+          return;
+        }
+
+        if (!email || !email.includes('@')) {
+          alert('कृपया वैध ईमेल पत्ता प्रविष्ट करा (Please enter a valid email address).');
+          const emailInput = document.getElementById('rsvpEmail');
+          if (emailInput) emailInput.focus();
+          return;
+        }
+
+        // Persist to localStorage with verification
+        const submission = {
+          name: name,
+          email: email,
+          attendance: attendance,
+          guests: guests,
+          dietary: dietary,
+          timestamp: new Date().toISOString()
+        };
+
+        let isPersisted = false;
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(submission));
+          const verifyData = localStorage.getItem(STORAGE_KEY);
+          if (verifyData) {
+            const parsed = JSON.parse(verifyData);
+            if (parsed && parsed.name === name) {
+              isPersisted = true;
+            }
+          }
+        } catch (storageErr) {
+          console.error('RSVP Persistence error:', storageErr);
+        }
+
+        // DO NOT REPORT SUCCESS UNLESS PERSISTED
+        if (!isPersisted) {
+          alert('क्षमस्व, स्थानिक स्टोरेज उपलब्ध नसल्याने उपस्थिती जतन करता आली नाही. कृपया खालील व्हॉट्सॲप बटनाद्वारे थेट कळवा (Could not persist RSVP. Please confirm via WhatsApp).');
+          return;
+        }
+
+        console.log('🎉 RSVP Submission Successfully Persisted:', submission);
+
+        // Prepare Verified Confirmation State
+        const isAccepting = attendance === 'accept';
+        const attendanceBadgeText = isAccepting ? 'सहर्ष स्वीकार · Joyfully Accepted' : 'क्षमस्व · Regretfully Declined';
+        const attendanceBadgeColor = isAccepting ? '#2E7D32' : '#C2185B';
+
+        const whatsappText = `॥ श्री गणेशाय नमः ॥\n\nआकांक्षा आणि विकास यांच्या शुभविवाहासाठी माझी उपस्थिती नोंदवली आहे.\n\nनाव: ${name}\nउपस्थिती: ${attendanceBadgeText}\nपाहुण्यांची संख्या: ${guests}\nटीप / सदिच्छा: ${dietary || 'मनःपूर्वक शुभेच्छा!'}\n\n📍 विवाह स्थळ: मु. वाणी, रोहा, जि. रायगड\n#AkankshaWedsVikas #26Nov2026`;
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappText)}`;
+
         const thankYouMessage = document.createElement('div');
         thankYouMessage.className = 'rsvp-thankyou text-center';
         thankYouMessage.innerHTML = `
-          <div class="thankyou-card" style="padding: 2.5rem 1.5rem; text-align: center;">
-            <div style="font-size: 2.5rem; margin-bottom: 1rem;">💐</div>
-            <h3 style="font-size: 1.8rem; margin-bottom: 0.75rem; font-family: inherit;">Thank You, ${guestName}!</h3>
-            <p style="font-size: 1.1rem; opacity: 0.9; max-width: 450px; margin: 0 auto 1.5rem;">
-              Your presence will make our celebration truly unforgettable. We can't wait to welcome you in Roha, Raigad!
-            </p>
-            <span style="display: inline-block; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7;">
-              November 26, 2026 • Vani, Roha, Raigad
+          <div class="thankyou-card" style="padding: 2.2rem 1.4rem; text-align: center; background: rgba(250, 247, 242, 0.95); border: 1.5px solid rgba(212, 175, 55, 0.6); border-radius: 16px; box-shadow: 0 12px 35px rgba(0,0,0,0.1);">
+            <div style="font-size: 2.4rem; margin-bottom: 0.6rem;">💐</div>
+            <span style="display: inline-block; background: ${attendanceBadgeColor}; color: #FFFFFF; font-size: 0.76rem; font-weight: 700; padding: 0.25rem 0.85rem; border-radius: 999px; letter-spacing: 0.05em; margin-bottom: 0.8rem;">
+              ✓ उपस्थिती नोंद यशस्वी (RSVP Recorded &amp; Saved)
             </span>
+            <h3 style="font-size: 1.7rem; color: #3C1620; margin-bottom: 0.4rem; font-family: 'Rozha One', serif;">धन्यवाद, ${name}!</h3>
+            <p style="font-size: 0.95rem; color: #444; max-width: 480px; margin: 0 auto 1.2rem; line-height: 1.6; font-family: 'Noto Serif Devanagari', serif;">
+              ${isAccepting ? 'आपली उपस्थिती आमच्या या पवित्र मंगल सोहळ्यात अत्यंत मोलाची ठरेल! आम्ही रोहा, रायगड येथे आपले सहर्ष स्वागत करण्यास उत्सुक आहोत.' : 'आपण उपस्थित राहू शकत नसल्याबद्दल खंत वाटते, तरीही आपले शुभाशीर्वाद सदैव सोबत राहतील!'}
+            </p>
+            <div style="background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.3); border-radius: 10px; padding: 0.8rem 1rem; max-width: 380px; margin: 0 auto 1.5rem; text-align: left; font-size: 0.85rem;">
+              <p style="margin: 0.2rem 0;"><strong>नाव:</strong> ${name}</p>
+              <p style="margin: 0.2rem 0;"><strong>पाहुणे:</strong> ${guests} Guest(s)</p>
+              <p style="margin: 0.2rem 0;"><strong>दिनांक:</strong> गुरुवार, २६ नोव्हेंबर २०२६</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; max-width: 380px; margin: 0 auto;">
+              <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-share" style="width: 100%; justify-content: center; font-size: 0.92rem; padding: 0.85rem 1.2rem;">
+                <span>💬 व्हॉट्सॲपवर कुटुंबाला पुष्टी पाठवा (Send WhatsApp Confirmation)</span>
+              </a>
+              <button type="button" class="btn-calendar-link add-to-calendar" style="width: 100%; justify-content: center; font-size: 0.92rem; padding: 0.85rem 1.2rem; background: #3C1620; color: #FAF7F2; border-color: rgba(212,175,55,0.4);">
+                <span>📅 कॅलेंडरमध्ये जोडा (Add to Google Calendar)</span>
+              </button>
+            </div>
           </div>
         `;
 

@@ -33,8 +33,8 @@
   <meta http-equiv="Expires" content="0">
 
   <!-- Main Stylesheets (with Cache-Busting Version) -->
-  <link rel="stylesheet" href="css/style.css?v=3.5">
-  <link rel="stylesheet" href="css/royal-invitation.css?v=3.5">
+  <link rel="stylesheet" href="css/style.css?v=4.0">
+  <link rel="stylesheet" href="css/royal-invitation.css?v=4.0">
 
   <!-- GSAP 3 & ScrollTrigger -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -45,11 +45,11 @@
 
   <!-- Three.js 3D WebGL Engine -->
   <script src="js/three.min.js"></script>
-  <script src="js/three-experience.js?v=3.5" defer></script>
+  <script src="js/three-experience.js?v=4.0" defer></script>
 
   <!-- Application Scripts -->
-  <script src="js/main.js?v=3.5" defer></script>
-  <script src="js/royal-interactive.js?v=3.5" defer></script>
+  <script src="js/main.js?v=4.0" defer></script>
+  <script src="js/royal-interactive.js?v=4.0" defer></script>
 </head>
 <body class="page-body">
 
@@ -63,8 +63,9 @@
     <div class="envelope-ambient"></div>
 
     <div class="envelope-lead-text">
-      <p class="envelope-shloka">॥ श्री गणेशाय नमः ॥ · ॥ श्री कुलदैवत प्रसन्न ॥</p>
-      <p class="envelope-subtitle">Royal Wedding Invitation · Akanksha &amp; Vikas</p>
+      <p class="envelope-shloka font-devanagari">॥ श्री गणेशाय नमः ॥</p>
+      <h1 class="envelope-names-title">Akanksha &amp; Vikas</h1>
+      <p class="envelope-subtitle">शुभविवाह निमंत्रण पत्रिका · Royal Wedding Invitation</p>
     </div>
 
     <!-- Royal Stage Triptych (Full-width Desktop Display with Zero Empty Gaps) -->
@@ -154,9 +155,7 @@
                 <span class="wax-seal-names">कदम 卐 शिंदे</span>
               </div>
             </div>
-            <div class="wax-seal-tap-hint">
-              <span>उघडा · TAP TO OPEN</span>
-            </div>
+
           </div>
         </div>
       </div>
@@ -173,13 +172,13 @@
       </aside>
     </div>
 
-    <!-- Prominent Bottom Action Bar (Clear & Unmissable Navigation) -->
+    <!-- Refined Bottom Action Bar (Clear Single Primary Action + Discreet Skip) -->
     <div class="envelope-bottom-bar">
       <button type="button" id="openInvitationBtn" class="btn-royal-open" aria-label="Open wedding invitation envelope">
-        <span class="btn-text">✨ निमंत्रण उघडा (Open Invitation)</span>
+        <span class="btn-text">✨ लग्नपत्रिका उघडा (Open Invitation)</span>
       </button>
-      <button type="button" id="skipEnvelopeBtn" class="btn-royal-explore" aria-label="Explore full wedding website directly">
-        <span>📜 संपूर्ण पत्रिका पहा (Explore Website) ↓</span>
+      <button type="button" id="skipEnvelopeBtn" class="btn-royal-skip" aria-label="Explore full wedding website directly">
+        <span>थेट पत्रिका पहा (Skip to Website) →</span>
       </button>
       <button type="button" id="replayEnvelopeBtn" class="btn-royal-replay" aria-label="पुन्हा पहा - Replay Envelope Animation" style="display: none;">
         <span>↺ पुन्हा पहा (Replay)</span>
@@ -200,8 +199,11 @@
     <!-- Desktop Navigation Links -->
     <ul class="nav-links" id="desktopNavLinks">
       <li><a href="#couple">वधू-वर (Couple)</a></li>
+      <li><a href="#countdown">लग्नघटी (Countdown)</a></li>
+      <li><a href="#invitation">पत्रिका (Invitation)</a></li>
       <li><a href="#scratch">शुभ मुहूर्त (Muhurat)</a></li>
-      <li><a href="#details">समारंभ (Events)</a></li>
+      <li><a href="#details">समारंभ (Ceremonies)</a></li>
+      <li><a href="#gallery">क्षणचित्रे (Gallery)</a></li>
       <li><a href="#story">स्नेहगाथा (Story)</a></li>
       <li><a href="#travel">स्थळ (Venue)</a></li>
       <li><a href="#rsvp">उपस्थिती (RSVP)</a></li>
@@ -238,8 +240,11 @@
     <div class="mobile-menu-inner">
       <ul class="mobile-menu-links">
         <li><a href="#couple">वधू-वर (The Couple)</a></li>
+        <li><a href="#countdown">लग्नघटी (Countdown)</a></li>
+        <li><a href="#invitation">पत्रिका (Formal Invitation)</a></li>
         <li><a href="#scratch">शुभ मुहूर्त (Muhurat)</a></li>
         <li><a href="#details">समारंभ (Ceremonies)</a></li>
+        <li><a href="#gallery">क्षणचित्रे (Moments Gallery)</a></li>
         <li><a href="#story">स्नेहगाथा (Our Story)</a></li>
         <li><a href="#travel">स्थळ (Venue &amp; Travel)</a></li>
         <li><a href="#rsvp">उपस्थिती (RSVP)</a></li>
@@ -255,7 +260,7 @@
   <!-- Main Content Wrapper -->
   <main id="main-content">
 
-    <!-- 3. Hero Section (Cinematic Editorial Presentation) -->
+    <!-- 1. Hero Section (Cinematic Editorial Presentation) -->
     <section id="hero" data-scroll aria-label="Akanksha &amp; Vikas Wedding Hero">
       <!-- Dynamic Multi-Slide Ken Burns Background -->
       <div class="hero-slides-wrapper" id="heroSlidesWrapper">
@@ -314,6 +319,19 @@
             </div>
           </div>
 
+          <!-- Direct Mobile Quick-Action Shortcuts -->
+          <div class="hero-quick-shortcuts" aria-label="Direct wedding section shortcuts">
+            <a href="#details" class="hero-quick-pill">
+              <span>💍 समारंभ (Ceremonies)</span>
+            </a>
+            <a href="#travel" class="hero-quick-pill">
+              <span>📍 स्थळ व मार्ग (Venue)</span>
+            </a>
+            <a href="#rsvp" class="hero-quick-pill highlight-pill">
+              <span>✉️ उपस्थिती (RSVP)</span>
+            </a>
+          </div>
+
           <!-- Interactive Slide Switcher / Timeline Pills (Flows naturally below capsule) -->
           <div class="hero-slide-controls" id="heroSlideControls" aria-label="Hero photo switcher">
             <button type="button" class="hero-dot active" data-slide="0" aria-label="Photo 1: Sunset Romance">
@@ -352,148 +370,7 @@
       </div>
     </section>
 
-    <!-- 4. The Invitation Section -->
-    <section id="invitation" data-scroll aria-label="The Wedding Invitation">
-      <div class="invitation-container">
-        <div class="section-label reveal">
-          <span>The Invitation</span>
-        </div>
-
-        <div class="invitation-parents-lead reveal" data-speed="0.95">
-          <div class="invitation-parents-grid">
-            <div class="parent-side">
-              <span class="parent-label">Bride's Family</span>
-              <p class="parent-names">Mrs. Akshata &amp; Mr. Arvind Shivram Kadam</p>
-              <p class="parent-hometown">Vani, Post Pingode, Roha, Raigad</p>
-            </div>
-            <div class="parents-amp">&amp;</div>
-            <div class="parent-side">
-              <span class="parent-label">Groom's Family</span>
-              <p class="parent-names">Mrs. Radha &amp; Late Mr. Shahaji Bapu Shinde</p>
-              <p class="parent-hometown">Mankarwadi, Pimpri, Man, Satara</p>
-            </div>
-          </div>
-        </div>
-
-        <p class="invitation-text reveal" data-speed="0.9">
-          Joyfully request the honor of your gracious presence and blessings to celebrate the auspicious wedding ceremony of their beloved children
-        </p>
-
-        <div class="invitation-couple-feature reveal">
-          <div class="couple-card-feature">
-            <h3 class="couple-honorific">Chi. Sau. Ka.</h3>
-            <h2 class="couple-featured-name">Akanksha</h2>
-            <p class="couple-desc">Elder daughter of Mrs. Akshata &amp; Mr. Arvind Kadam</p>
-          </div>
-          <div class="couple-feature-knot">&amp;</div>
-          <div class="couple-card-feature">
-            <h3 class="couple-honorific">Chi.</h3>
-            <h2 class="couple-featured-name">Vikas</h2>
-            <p class="couple-desc">Son of Mrs. Radha &amp; Late Mr. Shahaji Shinde</p>
-          </div>
-        </div>
-
-        <blockquote class="pull-quote reveal" data-speed="1.1">
-          <span class="marathi-quote font-devanagari">॥ दोन जीवांच्या या पवित्र मिलनाला । श्रीकृपेची साथ लाभो जन्मोजन्मी ॥</span>
-          <span class="quote-translation">&ldquo;May this sacred union of two souls be blessed with divine grace across every lifetime.&rdquo;</span>
-        </blockquote>
-
-        <div class="invitation-auspicious-date reveal" data-speed="0.8">
-          <p class="invitation-date">Thursday, the Twenty-Sixth of November, Two Thousand and Twenty-Six</p>
-          <p class="invitation-tithi font-devanagari">मिती कार्तिक कृष्ण द्वितीया शके १९४८ · शुभमुहूर्त दुपारी १.०५ वाजता</p>
-          <p class="invitation-muhurat-note">Auspicious Muhurat: 1:05 PM in the afternoon</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         4a. INTERACTIVE SCRATCH TO REVEAL CARD (GAMIFIED CEREMONIAL REVEAL)
-         ==================================================================== -->
-    <section id="scratch" class="scratch-section" data-scroll aria-label="Scratch to Reveal Muhurat">
-      <div class="scratch-header-wrap reveal">
-        <span class="scratch-kicker">॥ शुभ मुहूर्त जाणून घ्या ॥</span>
-        <h2 class="scratch-main-title">Scratch to Reveal</h2>
-        <p class="scratch-subtitle">आपल्या बोटाने (किंवा माऊसने) हे सोनेरी हृदय स्क्रॅच करा व शुभ मुहूर्त जाणून घ्या</p>
-      </div>
-
-      <!-- Scratch Card Box -->
-      <div id="scratchCardBox" class="scratch-card-box reveal">
-        <!-- Underneath Revealed Content -->
-        <div class="scratch-revealed-content">
-          <p class="reveal-seal">॥ श्री गणेशाय नमः ॥ · ॥ श्री कुलदैवत प्रसन्न ॥</p>
-          <h3 class="reveal-title">शुभविवाह सोहळा</h3>
-          
-          <div class="reveal-date-badge">
-            <span>२६ · ११ · २०२६</span>
-          </div>
-
-          <p class="reveal-day-marathi">गुरुवार, २६ नोव्हेंबर २०२६</p>
-          <p class="reveal-muhurat-time">शुभ मुहूर्त दुपारी १:०५ वाजता</p>
-          
-          <p class="reveal-venue">
-            <strong>विवाह स्थळ:</strong> मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड<br>
-            (Vivah Sthal, Vani, Roha, Raigad)
-          </p>
-
-          <div class="reveal-actions">
-            <button type="button" class="btn-calendar-link add-to-calendar">
-              <span>📅 Add to Calendar</span>
-            </button>
-            <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" class="btn-calendar-link" style="background: #3C1620; color: #FAF7F2; border: 1px solid rgba(212,175,55,0.4);">
-              <span>📍 Google Maps मार्ग</span>
-            </a>
-            <a href="https://api.whatsapp.com/send?text=%E0%A5%A5%20%E0%A4%B6%E0%A5%8D%E0%A4%B0%E0%A5%80%20%E0%A4%97%E0%A4%A3%E0%A5%87%E0%A4%B6%E0%A4%BE%E0%A4%AF%20%E0%A4%A8%E0%A4%AE%E0%A4%83%20%E0%A5%A5%0A%0A%E0%A4%98%E0%A4%B0%E0%A4%9A%E0%A5%80%20%E0%A4%AE%E0%A5%8B%E0%A4%A0%E0%A5%80%20%E0%A4%AE%E0%A5%81%E0%A4%B2%E0%A4%97%E0%A5%80%20%E0%A4%86%E0%A4%95%E0%A4%BE%E0%A4%82%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A4%86%E0%A4%A3%E0%A4%BF%20%E0%A4%98%E0%A4%B0%E0%A4%9A%E0%A4%BE%20%E0%A4%9B%E0%A5%8B%E0%A4%9F%E0%A4%BE%20%E0%A4%AE%E0%A5%81%E0%A4%B2%E0%A4%97%E0%A4%BE%20%E0%A4%B5%E0%A4%BF%E0%A4%95%E0%A4%BE%E0%A4%B8%20%E0%A4%AF%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A4%BE%20%E0%A4%B6%E0%A5%81%E0%A4%AD%E0%A4%B5%E0%A4%BF%E0%A4%B5%E0%A4%BE%E0%A4%B9%20%E0%A4%AE%E0%A5%81%E0%A4%B9%E0%A5%82%E0%A4%B0%E0%A5%8D%E0%A4%A4%20%E0%A5%A8%E0%A5%AC%20%E0%A4%A8%E0%A5%8B%E0%A4%B5%E0%A5%8D%E0%A4%B9%E0%A5%87%E0%A4%82%E0%A4%AC%E0%A4%B0%20%E0%A5%A8%E0%A5%A6%E0%A5%A8%E0%A5%AC%20%E0%A4%A6%E0%A5%81%E0%A4%AA%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A5%A7%3A%E0%A5%A6%E0%A5%AB%20%E0%A4%B5%E0%A4%BE%E0%A4%9C%E0%A4%A4%E0%A4%BE%20%E0%A4%86%E0%A4%B9%E0%A5%87!%0A%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%B3%20%E0%A4%A5%E0%A5%87%E0%A4%9F%20%E0%A4%A8%E0%A4%95%E0%A4%BE%E0%A4%B6%E0%A4%BE%3A%20https%3A%2F%2Fmaps.app.goo.gl%2F3ZooWCqM5zvsbTBv8%0A%23AkankshaWedsVikas%20%2326Nov2026" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-share">
-              <span>💬 Share Date</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Canvas Scratch Layer (Erased by Finger / Mouse) -->
-        <canvas id="scratchCanvas" class="scratch-canvas"></canvas>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         4b. REAL-TIME COUNTDOWN TO SHUBH MUHURAT
-         ==================================================================== -->
-    <section id="countdown" class="countdown-section" data-scroll aria-label="Countdown to Wedding">
-      <div class="reveal">
-        <p class="countdown-kicker">॥ लग्नघटी समीप ॥</p>
-        <h2 class="countdown-title">Counting Down to Forever</h2>
-      </div>
-
-      <div class="countdown-grid reveal">
-        <!-- Days -->
-        <div class="countdown-pill">
-          <div id="countDays" class="countdown-number">00</div>
-          <p class="countdown-label-marathi">दिवस</p>
-          <p class="countdown-label-en">Days</p>
-        </div>
-
-        <!-- Hours -->
-        <div class="countdown-pill">
-          <div id="countHours" class="countdown-number">00</div>
-          <p class="countdown-label-marathi">तास</p>
-          <p class="countdown-label-en">Hours</p>
-        </div>
-
-        <!-- Minutes -->
-        <div class="countdown-pill">
-          <div id="countMins" class="countdown-number">00</div>
-          <p class="countdown-label-marathi">मिनिटे</p>
-          <p class="countdown-label-en">Minutes</p>
-        </div>
-
-        <!-- Seconds -->
-        <div class="countdown-pill">
-          <div id="countSecs" class="countdown-number">00</div>
-          <p class="countdown-label-marathi">सेकंद</p>
-          <p class="countdown-label-en">Seconds</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4c. The Couple Section (Editorial Profiles) -->
+    <!-- 2. The Couple Section (Editorial Profiles & 3D Rings) -->
     <section id="couple" class="section couple-section" data-scroll aria-label="The Bride and Groom">
       <div class="text-center" style="margin-bottom: 3.5rem;">
         <span class="section-kicker font-devanagari" style="color: #D4AF37; font-size: 1.15rem; letter-spacing: 0.15em;">॥ एक सुंदर मराठमोळी स्नेहगाथा ॥</span>
@@ -576,7 +453,318 @@
       </div>
     </section>
 
-    <!-- 5. Our Story — Horizontal Scroll Section -->
+    <!-- 3. Real-Time Countdown to Shubh Muhurat -->
+    <section id="countdown" class="countdown-section" data-scroll aria-label="Countdown to Wedding">
+      <div class="countdown-header-wrap">
+        <p class="countdown-kicker">॥ लग्नघटी समीप ॥</p>
+        <h2 class="countdown-title">Counting Down to Forever</h2>
+      </div>
+
+      <div class="countdown-grid">
+        <!-- Days -->
+        <div class="countdown-pill">
+          <div id="countDays" class="countdown-number">38</div>
+          <p class="countdown-label-marathi">दिवस</p>
+          <p class="countdown-label-en">Days</p>
+        </div>
+
+        <!-- Hours -->
+        <div class="countdown-pill">
+          <div id="countHours" class="countdown-number">15</div>
+          <p class="countdown-label-marathi">तास</p>
+          <p class="countdown-label-en">Hours</p>
+        </div>
+
+        <!-- Minutes -->
+        <div class="countdown-pill">
+          <div id="countMins" class="countdown-number">40</div>
+          <p class="countdown-label-marathi">मिनिटे</p>
+          <p class="countdown-label-en">Minutes</p>
+        </div>
+
+        <!-- Seconds -->
+        <div class="countdown-pill">
+          <div id="countSecs" class="countdown-number">00</div>
+          <p class="countdown-label-marathi">सेकंद</p>
+          <p class="countdown-label-en">Seconds</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Formal Wedding Invitation -->
+    <section id="invitation" data-scroll aria-label="The Wedding Invitation">
+      <div class="invitation-container">
+        <div class="section-label reveal">
+          <span>The Invitation</span>
+        </div>
+
+        <div class="invitation-parents-lead reveal" data-speed="0.95">
+          <div class="invitation-parents-grid">
+            <div class="parent-side">
+              <span class="parent-label">Bride's Family</span>
+              <p class="parent-names">Mrs. Akshata &amp; Mr. Arvind Shivram Kadam</p>
+              <p class="parent-hometown">Vani, Post Pingode, Roha, Raigad</p>
+            </div>
+            <div class="parents-amp">&amp;</div>
+            <div class="parent-side">
+              <span class="parent-label">Groom's Family</span>
+              <p class="parent-names">Mrs. Radha &amp; Late Mr. Shahaji Bapu Shinde</p>
+              <p class="parent-hometown">Mankarwadi, Pimpri, Man, Satara</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="invitation-text reveal" data-speed="0.9">
+          Joyfully request the honor of your gracious presence and blessings to celebrate the auspicious wedding ceremony of their beloved children
+        </p>
+
+        <div class="invitation-couple-feature reveal">
+          <div class="couple-card-feature">
+            <h3 class="couple-honorific">Chi. Sau. Ka.</h3>
+            <h2 class="couple-featured-name">Akanksha</h2>
+            <p class="couple-desc">Elder daughter of Mrs. Akshata &amp; Mr. Arvind Kadam</p>
+          </div>
+          <div class="couple-feature-knot">&amp;</div>
+          <div class="couple-card-feature">
+            <h3 class="couple-honorific">Chi.</h3>
+            <h2 class="couple-featured-name">Vikas</h2>
+            <p class="couple-desc">Son of Mrs. Radha &amp; Late Mr. Shahaji Shinde</p>
+          </div>
+        </div>
+
+        <blockquote class="pull-quote reveal" data-speed="1.1">
+          <span class="marathi-quote font-devanagari">॥ दोन जीवांच्या या पवित्र मिलनाला । श्रीकृपेची साथ लाभो जन्मोजन्मी ॥</span>
+          <span class="quote-translation">&ldquo;May this sacred union of two souls be blessed with divine grace across every lifetime.&rdquo;</span>
+        </blockquote>
+
+        <div class="invitation-auspicious-date reveal" data-speed="0.8">
+          <p class="invitation-date">Thursday, the Twenty-Sixth of November, Two Thousand and Twenty-Six</p>
+          <p class="invitation-tithi font-devanagari">मिती कार्तिक कृष्ण द्वितीया शके १९४८ · शुभमुहूर्त दुपारी १.०५ वाजता</p>
+          <p class="invitation-muhurat-note">Auspicious Muhurat: 1:05 PM in the afternoon</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4a. Interactive Scratch-to-Reveal Muhurat Card -->
+    <section id="scratch" class="scratch-section" data-scroll aria-label="Scratch to Reveal Muhurat">
+      <div class="scratch-header-wrap reveal">
+        <span class="scratch-kicker">॥ शुभ मुहूर्त जाणून घ्या ॥</span>
+        <h2 class="scratch-main-title">Scratch to Reveal</h2>
+        <p class="scratch-subtitle">आपल्या बोटाने (किंवा माऊसने) हे सोनेरी हृदय स्क्रॅच करा व शुभ मुहूर्त जाणून घ्या</p>
+        <div class="scratch-tap-fallback">
+          <button type="button" id="btnDirectRevealMuhurat" class="btn-reveal-direct" aria-label="मुहूर्त थेट पहा (Tap to Reveal Muhurat)">
+            <span>✨ मुहूर्त थेट पहा (Tap to Reveal)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Scratch Card Box -->
+      <div id="scratchCardBox" class="scratch-card-box reveal">
+        <!-- Underneath Revealed Content -->
+        <div class="scratch-revealed-content">
+          <p class="reveal-seal">॥ श्री गणेशाय नमः ॥ · ॥ श्री कुलदैवत प्रसन्न ॥</p>
+          <h3 class="reveal-title">शुभविवाह सोहळा</h3>
+          
+          <div class="reveal-date-badge">
+            <span>२६ · ११ · २०२६</span>
+          </div>
+
+          <p class="reveal-day-marathi">गुरुवार, २६ नोव्हेंबर २०२६</p>
+          <p class="reveal-muhurat-time">शुभ मुहूर्त दुपारी १:०५ वाजता</p>
+          
+          <p class="reveal-venue">
+            <strong>विवाह स्थळ:</strong> मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड<br>
+            (Vivah Sthal, Vani, Roha, Raigad)
+          </p>
+
+          <div class="reveal-actions">
+            <button type="button" class="btn-calendar-link add-to-calendar">
+              <span>📅 Add to Calendar</span>
+            </button>
+            <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" class="btn-calendar-link" style="background: #3C1620; color: #FAF7F2; border: 1px solid rgba(212,175,55,0.4);">
+              <span>📍 Google Maps मार्ग</span>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=%E0%A5%A5%20%E0%A4%B6%E0%A5%8D%E0%A4%B0%E0%A5%80%20%E0%A4%97%E0%A4%A3%E0%A5%87%E0%A4%B6%E0%A4%BE%E0%A4%AF%20%E0%A4%A8%E0%A4%AE%E0%A4%83%20%E0%A5%A5%0A%0A%E0%A4%98%E0%A4%B0%E0%A4%9A%E0%A5%80%20%E0%A4%AE%E0%A5%8B%E0%A4%A0%E0%A5%80%20%E0%A4%AE%E0%A5%81%E0%A4%B2%E0%A4%97%E0%A5%80%20%E0%A4%86%E0%A4%95%E0%A4%BE%E0%A4%82%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE%20%E0%A4%86%E0%A4%A3%E0%A4%BF%20%E0%A4%98%E0%A4%B0%E0%A4%9A%E0%A4%BE%20%E0%A4%9B%E0%A5%8B%E0%A4%9F%E0%A4%BE%20%E0%A4%AE%E0%A5%81%E0%A4%B2%E0%A4%97%E0%A4%BE%20%E0%A4%B5%E0%A4%BF%E0%A4%95%E0%A4%BE%E0%A4%B8%20%E0%A4%AF%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A4%BE%20%E0%A4%B6%E0%A5%81%E0%A4%AD%E0%A4%B5%E0%A4%BF%E0%A4%B5%E0%A4%BE%E0%A4%B9%20%E0%A4%AE%E0%A5%81%E0%A4%B9%E0%A5%82%E0%A4%B0%E0%A5%8D%E0%A4%A4%20%E0%A5%A8%E0%A5%AC%20%E0%A4%A8%E0%A5%8B%E0%A4%B5%E0%A5%8D%E0%A4%B9%E0%A5%87%E0%A4%82%E0%A4%AC%E0%A4%B0%20%E0%A5%A8%E0%A5%A6%E0%A5%A8%E0%A5%AC%20%E0%A4%A6%E0%A5%81%E0%A4%AA%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A5%A7%3A%E0%A5%A6%E0%A5%AB%20%E0%A4%B5%E0%A4%BE%E0%A4%9C%E0%A4%A4%E0%A4%BE%20%E0%A4%86%E0%A4%B9%E0%A5%87!%0A%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%B3%20%E0%A4%A5%E0%A5%87%E0%A4%9F%20%E0%A4%A8%E0%A4%95%E0%A4%BE%E0%A4%B6%E0%A4%BE%3A%20https%3A%2F%2Fmaps.app.goo.gl%2F3ZooWCqM5zvsbTBv8%0A%23AkankshaWedsVikas%20%2326Nov2026" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-share">
+              <span>💬 Share Date</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Canvas Scratch Layer (Erased by Finger / Mouse) -->
+        <canvas id="scratchCanvas" class="scratch-canvas"></canvas>
+      </div>
+    </section>
+
+    <!-- 5. The Ceremonies Schedule (साखरपुडा, हळदी, शुभविवाह) -->
+    <section id="details" class="section" data-scroll aria-label="Wedding Event Details">
+      <div class="text-center" style="margin-bottom: 3.5rem;">
+        <span class="section-kicker font-devanagari">॥ विवाह समारंभ ॥</span>
+        <h2 class="section-title reveal">The Ceremonies</h2>
+        <p class="section-subtitle reveal">Three days of sacred rituals, music, joy, and eternal vows</p>
+      </div>
+
+      <div class="ceremonies-grid">
+        <!-- Event 1: Sakharpuda -->
+        <article class="ceremony-card reveal">
+          <div class="ceremony-badge">
+            <span class="ceremony-part font-devanagari">साखरपुडा</span>
+            <span class="ceremony-subbadge">Part One</span>
+          </div>
+          <h3 class="ceremony-title">Sakharpuda</h3>
+          <p class="ceremony-marathi-title font-devanagari">साखरपुडा व वाङ्निश्चय सोहळा</p>
+          <div class="ceremony-divider"></div>
+          
+          <div class="ceremony-meta-item">
+            <span class="ceremony-meta-label">Date</span>
+            <p class="ceremony-meta-value">Tuesday, 24th November 2026</p>
+            <p class="ceremony-meta-sub font-devanagari">मंगळवार दि. २४/११/२०२६</p>
+          </div>
+
+          <div class="ceremony-meta-item">
+            <span class="ceremony-meta-label">Time</span>
+            <p class="ceremony-meta-value highlight-time">12:05 PM in the Afternoon</p>
+            <p class="ceremony-meta-sub font-devanagari">दुपारी १२.०५ वाजता</p>
+          </div>
+
+          <div class="ceremony-meta-item">
+            <span class="ceremony-meta-label">Venue</span>
+            <p class="ceremony-meta-value">Vivah Sthal, Vani</p>
+            <p class="ceremony-meta-sub font-devanagari">मु. वाणी, पो. पिंगोडे, ता. रोहा</p>
+            <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" class="ceremony-map-chip" aria-label="Sakharpuda Venue Map">
+              <span>📍 थेट नकाशा / Directions ↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Event 2: Haldi Samarambha -->
+        <article class="ceremony-card reveal">
+          <div class="ceremony-badge">
+            <span class="ceremony-part font-devanagari">हळदी समारंभ</span>
+            <span class="ceremony-subbadge">Part Two</span>
+          </div>
+          <h3 class="ceremony-title">Haldi Samarambha</h3>
+          <p class="ceremony-marathi-title font-devanagari">मंगल हळदी सोहळा</p>
+          <div class="ceremony-divider"></div>
+
+          <div class="ceremony-meta-item">
+            <span class="ceremony-meta-label">Date</span>
+            <p class="ceremony-meta-value">Wednesday, 25th November 2026</p>
+            <p class="ceremony-meta-sub font-devanagari">बुधवार दि. २५/११/२०२६</p>
+          </div>
+
+          <div class="ceremony-meta-item">
+            <span class="ceremony-meta-label">Time</span>
+            <p class="ceremony-meta-value highlight-time">09:05 AM in the Morning</p>
+            <p class="ceremony-meta-sub font-devanagari">सकाळी ९.०५ वाजता</p>
+          </div>
+
+          <div class="ceremony-meta-item ceremony-venues-section">
+            <span class="ceremony-meta-label">Venues · हळदीची ठिकाणे</span>
+            
+            <div class="haldi-dual-venues">
+              <!-- 1. Bride Haldi Location -->
+              <div class="haldi-venue-pill-box bride-haldi-box">
+                <div class="haldi-box-header">
+                  <span class="haldi-badge bride-badge">👰 वधूची हळद · Bride's Haldi</span>
+                </div>
+                <h4 class="haldi-venue-heading">Vivah Sthal, Vani</h4>
+                <p class="haldi-venue-addr font-devanagari">मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड</p>
+                <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" class="ceremony-map-chip" aria-label="Bride Haldi Location Map">
+                  <span>📍 थेट नकाशा (Vani) ↗</span>
+                </a>
+              </div>
+
+              <!-- 2. Groom Haldi Location -->
+              <div class="haldi-venue-pill-box groom-haldi-box">
+                <div class="haldi-box-header">
+                  <span class="haldi-badge groom-badge">🤵 वराची हळद · Groom's Haldi (Vikas)</span>
+                </div>
+                <h4 class="haldi-venue-heading">Bageshree Society, Kharghar</h4>
+                <p class="haldi-venue-addr font-devanagari">बागेश्री सोसायटी, तळोजा, खारघर - ४१०२१०</p>
+                <p class="haldi-venue-subaddr">Bageshree Society, Taloja, Kharghar 410210</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=Bageshree+Society+Taloja+Kharghar+410210" target="_blank" rel="noopener noreferrer" class="ceremony-map-chip" aria-label="Groom Haldi Location Map">
+                  <span>📍 थेट नकाशा (Kharghar) ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Event 3: Shubh Vivah -->
+        <article class="ceremony-card ceremony-card-featured reveal">
+          <div class="ceremony-badge featured-badge">
+            <span class="ceremony-part font-devanagari">शुभ विवाह मुहूर्त</span>
+            <span class="ceremony-subbadge">Main Ceremony</span>
+          </div>
+          <h3 class="ceremony-title">Shubh Vivah</h3>
+          <p class="ceremony-marathi-title font-devanagari">शुभविवाह सोहळा व सप्तपदी</p>
+          <div class="ceremony-divider"></div>
+
+          <div class="ceremony-meta-item">
+            <span class="ceremony-meta-label">Date</span>
+            <p class="ceremony-meta-value">Thursday, 26th November 2026</p>
+            <p class="ceremony-meta-sub font-devanagari">कार्तिक कृ. द्वितीया शके १९४८</p>
+          </div>
+
+          <div class="ceremony-meta-item">
+            <span class="ceremony-meta-label">Auspicious Muhurat</span>
+            <p class="ceremony-meta-value highlight-time-muhurat">01:05 PM in the Afternoon</p>
+            <p class="ceremony-meta-sub font-devanagari">शुभमुहूर्त दुपारी १.०५ वाजता</p>
+          </div>
+
+          <div class="ceremony-meta-item">
+            <span class="ceremony-meta-label">Venue</span>
+            <p class="ceremony-meta-value">Vivah Sthal, Vani</p>
+            <p class="ceremony-meta-sub font-devanagari">मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड</p>
+            <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" class="ceremony-map-chip" style="background: rgba(60, 22, 32, 0.1); border-color: #D4AF37; font-weight: 700;" aria-label="Shubh Vivah Venue Map">
+              <span>📍 Google Maps Live Location ↗</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6. Moments Photo Gallery -->
+    <section id="gallery" class="section" data-scroll aria-label="Moments Gallery">
+      <div class="text-center" style="margin-bottom: 3rem;">
+        <h2 class="section-title reveal">Moments</h2>
+        <p class="section-subtitle reveal">Captured between stolen glances, coastal breezes, and sunlit afternoons</p>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="gallery-item reveal">
+          <img class="gallery-img" src="images/couple-bougainvillea-romantic.jpg" data-src="images/couple-bougainvillea-romantic.jpg" alt="Akanksha leaning on Vikas with bougainvillea bloom" loading="lazy" width="600" height="800">
+          <figcaption class="gallery-caption">Bougainvillea Bloom &amp; Tender Moments</figcaption>
+        </figure>
+
+        <figure class="gallery-item reveal">
+          <img class="gallery-img" src="images/couple-bike-candid.jpg" data-src="images/couple-bike-candid.jpg" alt="Vikas and Akanksha candid ride on bike" loading="lazy" width="600" height="800">
+          <figcaption class="gallery-caption">Ride of a Lifetime · Carefree Laughter</figcaption>
+        </figure>
+
+        <figure class="gallery-item reveal">
+          <img class="gallery-img" src="images/couple-paithani-traditional.jpg" data-src="images/couple-paithani-traditional.jpg" alt="Royal blue Paithani saree traditional look" loading="lazy" width="600" height="900">
+          <figcaption class="gallery-caption">Royal Paithani Elegance · Tradition &amp; Pride</figcaption>
+        </figure>
+
+        <figure class="gallery-item reveal">
+          <img class="gallery-img" src="images/family-celebration-paithani.jpg" data-src="images/family-celebration-paithani.jpg" alt="Family celebration and blessings" loading="lazy" width="600" height="800">
+          <figcaption class="gallery-caption">Pure Joy &amp; Sacred Family Blessings</figcaption>
+        </figure>
+
+        <figure class="gallery-item reveal">
+          <img class="gallery-img" src="images/gallery-2.jpg" data-src="images/gallery-2.jpg" alt="Akanksha traditional silk saree portrait" loading="lazy" width="600" height="750">
+          <figcaption class="gallery-caption">Traditional Grace &amp; Eternal Warmth</figcaption>
+        </figure>
+
+        <figure class="gallery-item reveal">
+          <img class="gallery-img" src="images/gallery-1.jpg" data-src="images/gallery-1.jpg" alt="Sunset dance dip" loading="lazy" width="600" height="750">
+          <figcaption class="gallery-caption">Dipped in Golden Twilight</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 6a. Our Story Timeline (2019 - 2026) -->
     <section id="story" class="story-section" data-scroll aria-label="Our Story Timeline">
       <div class="story-header-wrap">
         <h2 class="section-title reveal">Our Story</h2>
@@ -648,156 +836,98 @@
       </div>
     </section>
 
-    <!-- 6. Gallery Mosaic Section -->
-    <section id="gallery" class="section" data-scroll aria-label="Moments Gallery">
-      <div class="text-center" style="margin-bottom: 3rem;">
-        <h2 class="section-title reveal">Moments</h2>
-        <p class="section-subtitle reveal">Captured between stolen glances, coastal breezes, and sunlit afternoons</p>
-      </div>
-
-      <div class="gallery-grid">
-        <figure class="gallery-item reveal">
-          <img class="gallery-img" src="images/couple-bougainvillea-romantic.jpg" data-src="images/couple-bougainvillea-romantic.jpg" alt="Akanksha leaning on Vikas with bougainvillea bloom" loading="lazy" width="600" height="800">
-          <figcaption class="gallery-caption">Bougainvillea Bloom &amp; Tender Moments</figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal">
-          <img class="gallery-img" src="images/couple-bike-candid.jpg" data-src="images/couple-bike-candid.jpg" alt="Vikas and Akanksha candid ride on bike" loading="lazy" width="600" height="800">
-          <figcaption class="gallery-caption">Ride of a Lifetime · Carefree Laughter</figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal">
-          <img class="gallery-img" src="images/couple-paithani-traditional.jpg" data-src="images/couple-paithani-traditional.jpg" alt="Royal blue Paithani saree traditional look" loading="lazy" width="600" height="900">
-          <figcaption class="gallery-caption">Royal Paithani Elegance · Tradition &amp; Pride</figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal">
-          <img class="gallery-img" src="images/family-celebration-paithani.jpg" data-src="images/family-celebration-paithani.jpg" alt="Family celebration and blessings" loading="lazy" width="600" height="800">
-          <figcaption class="gallery-caption">Pure Joy &amp; Sacred Family Blessings</figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal">
-          <img class="gallery-img" src="images/gallery-2.jpg" data-src="images/gallery-2.jpg" alt="Akanksha traditional silk saree portrait" loading="lazy" width="600" height="750">
-          <figcaption class="gallery-caption">Traditional Grace &amp; Eternal Warmth</figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal">
-          <img class="gallery-img" src="images/gallery-1.jpg" data-src="images/gallery-1.jpg" alt="Sunset dance dip" loading="lazy" width="600" height="750">
-          <figcaption class="gallery-caption">Dipped in Golden Twilight</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <!-- 7. The Details Section (Ceremonies / समारंभ) -->
-    <section id="details" class="section" data-scroll aria-label="Wedding Event Details">
+    <!-- 7. Venue & Travel Directions (मु. वाणी, रोहा) -->
+    <section id="travel" class="section" data-scroll aria-label="Travel and Accommodations">
       <div class="text-center" style="margin-bottom: 3.5rem;">
-        <span class="section-kicker font-devanagari">॥ विवाह समारंभ ॥</span>
-        <h2 class="section-title reveal">The Ceremonies</h2>
-        <p class="section-subtitle reveal">Three days of sacred rituals, music, joy, and eternal vows</p>
+        <span class="section-kicker font-devanagari">॥ विवाह स्थळ व प्रवास ॥</span>
+        <h2 class="section-title reveal">Venue &amp; Travel</h2>
+        <p class="section-subtitle reveal">Getting to Vani, Roha in the scenic Raigad Konkan belt</p>
       </div>
 
-      <div class="ceremonies-grid">
-        <!-- Event 1: Sakharpuda -->
-        <article class="ceremony-card reveal">
-          <div class="ceremony-badge">
-            <span class="ceremony-part font-devanagari">साखरपुडा</span>
-            <span class="ceremony-subbadge">Part One</span>
-          </div>
-          <h3 class="ceremony-title">Sakharpuda</h3>
-          <p class="ceremony-marathi-title font-devanagari">साखरपुडा व वाङ्निश्चय सोहळा</p>
-          <div class="ceremony-divider"></div>
-          
-          <div class="ceremony-meta-item">
-            <span class="ceremony-meta-label">Date</span>
-            <p class="ceremony-meta-value">Tuesday, 24th November 2026</p>
-            <p class="ceremony-meta-sub font-devanagari">मंगळवार दि. २४/११/२०२६</p>
-          </div>
-
-          <div class="ceremony-meta-item">
-            <span class="ceremony-meta-label">Time</span>
-            <p class="ceremony-meta-value highlight-time">12:05 PM in the Afternoon</p>
-            <p class="ceremony-meta-sub font-devanagari">दुपारी १२.०५ वाजता</p>
-          </div>
-
-          <div class="ceremony-meta-item">
-            <span class="ceremony-meta-label">Venue</span>
-            <p class="ceremony-meta-value">Vivah Sthal, Vani</p>
-            <p class="ceremony-meta-sub font-devanagari">मु. वाणी, पो. पिंगोडे, ता. रोहा</p>
-            <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" class="ceremony-map-chip" aria-label="Sakharpuda Venue Map">
-              <span>📍 थेट नकाशा / Directions ↗</span>
+      <!-- Venues Showcase Grid (Main Wedding Venue & Groom Haldi Venue) -->
+      <div class="travel-venues-dual">
+        <!-- 1. Main Wedding Venue: Vani, Roha -->
+        <div class="venue-showcase-card reveal">
+          <span class="venue-kicker">मुख्य विवाह स्थळ · Main Wedding Venue</span>
+          <h3 class="venue-main-title">Vivah Sthal (मु. वाणी)</h3>
+          <p class="venue-address-lead font-devanagari">मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड</p>
+          <p class="venue-address-english">At Post Vani, Post Pingode, Taluka Roha, District Raigad, Maharashtra 402109</p>
+          <p class="venue-ceremonies-tag font-devanagari">👑 साखरपुडा, वधूची हळद &amp; शुभ विवाह सोहळा (२४, २५, २६ नोव्हेंबर)</p>
+          <div style="margin-top: 1.2rem;">
+            <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" style="color: #D4AF37; font-weight: 700; text-decoration: underline; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+              <span>📍 Google Maps (Vani, Roha) ↗</span>
             </a>
           </div>
-        </article>
+        </div>
 
-        <!-- Event 2: Haldi Samarambha -->
-        <article class="ceremony-card reveal">
-          <div class="ceremony-badge">
-            <span class="ceremony-part font-devanagari">हळदी समारंभ</span>
-            <span class="ceremony-subbadge">Part Two</span>
-          </div>
-          <h3 class="ceremony-title">Haldi Samarambha</h3>
-          <p class="ceremony-marathi-title font-devanagari">मंगल हळदी सोहळा</p>
-          <div class="ceremony-divider"></div>
-
-          <div class="ceremony-meta-item">
-            <span class="ceremony-meta-label">Date</span>
-            <p class="ceremony-meta-value">Wednesday, 25th November 2026</p>
-            <p class="ceremony-meta-sub font-devanagari">बुधवार दि. २५/११/२०२६</p>
-          </div>
-
-          <div class="ceremony-meta-item">
-            <span class="ceremony-meta-label">Time</span>
-            <p class="ceremony-meta-value highlight-time">09:05 AM in the Morning</p>
-            <p class="ceremony-meta-sub font-devanagari">सकाळी ९.०५ वाजता</p>
-          </div>
-
-          <div class="ceremony-meta-item">
-            <span class="ceremony-meta-label">Venue</span>
-            <p class="ceremony-meta-value">Vivah Sthal, Vani</p>
-            <p class="ceremony-meta-sub font-devanagari">मु. वाणी, पो. पिंगोडे, ता. रोहा</p>
-            <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" class="ceremony-map-chip" aria-label="Haldi Venue Map">
-              <span>📍 थेट नकाशा / Directions ↗</span>
+        <!-- 2. Groom's Haldi Venue: Taloja Kharghar -->
+        <div class="venue-showcase-card groom-haldi-venue-showcase reveal">
+          <span class="venue-kicker groom-kicker">वराची हळद · Groom's Haldi Venue (२५ नोव्हेंबर)</span>
+          <h3 class="venue-main-title">Bageshree Society (बागेश्री सोसायटी)</h3>
+          <p class="venue-address-lead font-devanagari">बागेश्री सोसायटी, तळोजा, खारघर - ४१०२१०</p>
+          <p class="venue-address-english">Bageshree Society, Taloja, Kharghar, Navi Mumbai - 410210</p>
+          <p class="venue-ceremonies-tag groom-tag font-devanagari">💛 चि. विकासची हळद (Wednesday, 25th November 2026)</p>
+          <div style="margin-top: 1.2rem;">
+            <a href="https://www.google.com/maps/search/?api=1&query=Bageshree+Society+Taloja+Kharghar+410210" target="_blank" rel="noopener noreferrer" style="color: #D4AF37; font-weight: 700; text-decoration: underline; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+              <span>📍 Google Maps (Taloja Kharghar) ↗</span>
             </a>
           </div>
-        </article>
+        </div>
+      </div>
 
-        <!-- Event 3: Shubh Vivah -->
-        <article class="ceremony-card ceremony-card-featured reveal">
-          <div class="ceremony-badge featured-badge">
-            <span class="ceremony-part font-devanagari">शुभ विवाह मुहूर्त</span>
-            <span class="ceremony-subbadge">Main Ceremony</span>
-          </div>
-          <h3 class="ceremony-title">Shubh Vivah</h3>
-          <p class="ceremony-marathi-title font-devanagari">शुभविवाह सोहळा व सप्तपदी</p>
-          <div class="ceremony-divider"></div>
+      <div class="travel-grid">
+        <!-- Travel Option 1: Road from Mumbai -->
+        <div class="travel-card reveal">
+          <div class="travel-icon">🚗</div>
+          <h3 class="travel-name">From Mumbai / Navi Mumbai</h3>
+          <p class="travel-desc">
+            Drive via Mumbai-Goa Highway (NH-66) or via Panvel &rarr; Pen &rarr; Nagothane &rarr; Roha. Approx. 2.5 to 3 hours scenic drive through the Konkan countryside.
+          </p>
+          <span class="travel-distance">Approx. 115 km</span>
+        </div>
 
-          <div class="ceremony-meta-item">
-            <span class="ceremony-meta-label">Date</span>
-            <p class="ceremony-meta-value">Thursday, 26th November 2026</p>
-            <p class="ceremony-meta-sub font-devanagari">कार्तिक कृ. द्वितीया शके १९४८</p>
-          </div>
+        <!-- Travel Option 2: Road from Pune -->
+        <div class="travel-card reveal">
+          <div class="travel-icon">🏔️</div>
+          <h3 class="travel-name">From Pune</h3>
+          <p class="travel-desc">
+            Take the Mumbai-Pune Expressway &rarr; exit at Khopoli &rarr; via Pali (Ballaleshwar temple road) &rarr; Roha. Approx. 2.5 to 3 hours journey.
+          </p>
+          <span class="travel-distance">Approx. 125 km</span>
+        </div>
 
-          <div class="ceremony-meta-item">
-            <span class="ceremony-meta-label">Auspicious Muhurat</span>
-            <p class="ceremony-meta-value highlight-time-muhurat">01:05 PM in the Afternoon</p>
-            <p class="ceremony-meta-sub font-devanagari">शुभमुहूर्त दुपारी १.०५ वाजता</p>
-          </div>
+        <!-- Travel Option 3: By Rail -->
+        <div class="travel-card reveal">
+          <div class="travel-icon">🚆</div>
+          <h3 class="travel-name">By Train (Roha Station)</h3>
+          <p class="travel-desc">
+            Roha Railway Station (ROHA) is well-connected on Central Railway &amp; Konkan Railway. Local autos and cabs are readily available from Roha station to Vani (15 mins).
+          </p>
+          <span class="travel-distance">15 mins from Roha Stn</span>
+        </div>
+      </div>
 
-          <div class="ceremony-meta-item">
-            <span class="ceremony-meta-label">Venue</span>
-            <p class="ceremony-meta-value">Vivah Sthal, Vani</p>
-            <p class="ceremony-meta-sub font-devanagari">मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड</p>
-            <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" class="ceremony-map-chip" style="background: rgba(60, 22, 32, 0.1); border-color: #D4AF37; font-weight: 700;" aria-label="Shubh Vivah Venue Map">
-              <span>📍 Google Maps Live Location ↗</span>
-            </a>
-          </div>
-        </article>
+      <!-- Nearby Stays Note -->
+      <div class="travel-stay-note reveal">
+        <p class="stay-note-title">Accommodations &amp; Stays</p>
+        <p class="stay-note-body">
+          Comfortable hotel and resort options are available within Roha town and nearby Nagothane/Kolad belt for guests arriving from afar. Please connect with our family coordinators for assistance.
+        </p>
+      </div>
+
+      <!-- Google Maps Link -->
+      <div class="text-center reveal" style="margin-top: 2.5rem;">
+        <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" class="btn-map" aria-label="Open Vani, Roha on Google Maps" style="display: inline-flex; align-items: center; gap: 0.6rem; font-size: 1.05rem; padding: 1.1rem 2.5rem;">
+          <span>📍 Google Maps वर थेट मार्ग पहा (Open Live GPS Location) &rarr;</span>
+        </a>
       </div>
     </section>
 
-    <!-- 8. RSVP Section -->
+    <!-- 8. RSVP Response & WhatsApp Wishes -->
     <section id="rsvp" data-scroll aria-label="RSVP Response">
       <div class="text-center">
+        <!-- Persistent status container for returning guests -->
+        <div id="rsvpSavedStatus" class="rsvp-saved-banner" style="display: none;" role="status"></div>
         <h2 class="rsvp-title reveal">Will You Join Us?</h2>
         <p class="rsvp-subtitle reveal">Kindly respond to assist us in welcoming you with warm hospitality</p>
 
@@ -866,74 +996,7 @@
       </div>
     </section>
 
-    <!-- 10. Travel & Stay Section (विवाह स्थळ व प्रवास) -->
-    <section id="travel" class="section" data-scroll aria-label="Travel and Accommodations">
-      <div class="text-center" style="margin-bottom: 3.5rem;">
-        <span class="section-kicker font-devanagari">॥ विवाह स्थळ व प्रवास ॥</span>
-        <h2 class="section-title reveal">Venue &amp; Travel</h2>
-        <p class="section-subtitle reveal">Getting to Vani, Roha in the scenic Raigad Konkan belt</p>
-      </div>
 
-      <!-- Main Venue Address Showcase -->
-      <div class="venue-showcase-card reveal">
-        <span class="venue-kicker">Wedding Location</span>
-        <h3 class="venue-main-title">Vivah Sthal (मु. वाणी)</h3>
-        <p class="venue-address-lead font-devanagari">मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड</p>
-        <p class="venue-address-english">At Post Vani, Post Pingode, Taluka Roha, District Raigad, Maharashtra 402109</p>
-        <div style="margin-top: 1.2rem;">
-          <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" style="color: #D4AF37; font-weight: 700; text-decoration: underline; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.4rem;">
-            <span>📍 Google Maps लोकेशन उघडा (Tap to Navigate) ↗</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="travel-grid">
-        <!-- Travel Option 1: Road from Mumbai -->
-        <div class="travel-card reveal">
-          <div class="travel-icon">🚗</div>
-          <h3 class="travel-name">From Mumbai / Navi Mumbai</h3>
-          <p class="travel-desc">
-            Drive via Mumbai-Goa Highway (NH-66) or via Panvel &rarr; Pen &rarr; Nagothane &rarr; Roha. Approx. 2.5 to 3 hours scenic drive through the Konkan countryside.
-          </p>
-          <span class="travel-distance">Approx. 115 km</span>
-        </div>
-
-        <!-- Travel Option 2: Road from Pune -->
-        <div class="travel-card reveal">
-          <div class="travel-icon">🏔️</div>
-          <h3 class="travel-name">From Pune</h3>
-          <p class="travel-desc">
-            Take the Mumbai-Pune Expressway &rarr; exit at Khopoli &rarr; via Pali (Ballaleshwar temple road) &rarr; Roha. Approx. 2.5 to 3 hours journey.
-          </p>
-          <span class="travel-distance">Approx. 125 km</span>
-        </div>
-
-        <!-- Travel Option 3: By Rail -->
-        <div class="travel-card reveal">
-          <div class="travel-icon">🚆</div>
-          <h3 class="travel-name">By Train (Roha Station)</h3>
-          <p class="travel-desc">
-            Roha Railway Station (ROHA) is well-connected on Central Railway &amp; Konkan Railway. Local autos and cabs are readily available from Roha station to Vani (15 mins).
-          </p>
-          <span class="travel-distance">15 mins from Roha Stn</span>
-        </div>
-      </div>
-
-      <!-- Nearby Stays Note -->
-      <div class="travel-stay-note reveal">
-        <p class="stay-note-title">Accommodations &amp; Stays</p>
-        <p class="stay-note-body">
-          Comfortable hotel and resort options are available within Roha town and nearby Nagothane/Kolad belt for guests arriving from afar. Please connect with our family coordinators for assistance.
-        </p>
-      </div>
-
-      <!-- Google Maps Link -->
-      <div class="text-center reveal" style="margin-top: 2.5rem;">
-        <a href="https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8" target="_blank" rel="noopener noreferrer" class="btn-map" aria-label="Open Vani, Roha on Google Maps" style="display: inline-flex; align-items: center; gap: 0.6rem; font-size: 1.05rem; padding: 1.1rem 2.5rem;">
-          <span>📍 Google Maps वर थेट मार्ग पहा (Open Live GPS Location) &rarr;</span>
-        </a>
-      </div>
-    </section>
 
     <!-- 11. Footer -->
     <footer class="site-footer" data-scroll aria-label="Site Footer">
