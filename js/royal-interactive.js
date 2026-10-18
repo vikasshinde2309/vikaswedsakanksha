@@ -176,12 +176,17 @@
     updateUI(active) {
       const btn = document.getElementById('audioToggleBtn');
       if (btn) {
+        const label = btn.querySelector('.audio-btn-label');
         if (active) {
           btn.classList.add('playing');
+          btn.classList.remove('paused');
           btn.setAttribute('aria-label', 'संगीत बंद करा (Mute Music)');
+          if (label) label.textContent = 'संगीत चालू (Music)';
         } else {
           btn.classList.remove('playing');
+          btn.classList.add('paused');
           btn.setAttribute('aria-label', 'संगीत चालू करा (Play Music)');
+          if (label) label.textContent = 'संगीत बंद (Muted)';
         }
       }
     }
@@ -198,14 +203,25 @@
     const envelopeCard = document.getElementById('envelopeCardClickable');
     const openBtn = document.getElementById('openInvitationBtn');
     const skipBtn = document.getElementById('skipEnvelopeBtn');
+    const replayBtn = document.getElementById('replayEnvelopeBtn');
+    const navReplayBtn = document.getElementById('replayEnvelopeNavBtn');
+    const mobileReplayBtn = document.getElementById('replayEnvelopeMobileBtn');
 
-    if (!envelopeScreen || !waxSeal) return;
+    if (!envelopeScreen) return;
+
+    // Direct section link or skip query bypass
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('skipEnvelope') === 'true' || window.location.hash.length > 1) {
+      envelopeScreen.classList.add('opened', 'dismissed');
+      envelopeScreen.style.display = 'none';
+    }
+
+    let isAnimating = false;
+    let isFullyOpened = false;
 
     function openEnvelope(instant = false) {
-      if (envelopeScreen.classList.contains('opened') || envelopeScreen.classList.contains('fading-out')) return;
-
-      // 1. Play seal break sound
-      weddingAudio.playWaxSealCrackSound();
+      if (isAnimating) return;
+      if (envelopeScreen.classList.contains('fading-out') || envelopeScreen.classList.contains('dismissed')) return;
 
       if (instant) {
         // Quick bypass if user taps "Skip"
@@ -214,92 +230,201 @@
           envelopeScreen.classList.add('dismissed');
           const hero = document.getElementById('hero') || document.getElementById('scratch');
           if (hero) hero.scrollIntoView({ behavior: 'smooth' });
-        }, 400);
+        }, 350);
         return;
       }
 
-      // 2. Trigger envelope 3D flap rotation & letter rise
-      envelopeScreen.classList.add('opened');
+      // If already opened, tapping again enters the full wedding website
+      if (isFullyOpened) {
+        enterWebsite();
+        return;
+      }
 
-      // 3. Trigger opening sparkle confetti
-      launchConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.45);
+      isAnimating = true;
 
-      // 4. Start serene background wedding music
+      // 1. Play seal break sound
+      weddingAudio.playWaxSealCrackSound();
+
+      // State 2: Seal interaction (tactile press)
+      envelopeScreen.classList.add('seal-pressed');
+
+      // State 3: Flap opening and card rise
       setTimeout(() => {
-        weddingAudio.play();
-      }, 700);
+        envelopeScreen.classList.remove('seal-pressed');
+        envelopeScreen.classList.add('opened');
 
-      // 5. Allow guest to admire the unfolding letter for 2.2 seconds, then gracefully dissolve into the website
-      setTimeout(() => {
-        envelopeScreen.classList.add('fading-out');
-      }, 2200);
+        // Confetti burst on flap reveal
+        launchConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.42);
 
+        // Soft music player start
+        setTimeout(() => {
+          weddingAudio.play();
+        }, 600);
+
+        // State 4 & 5: Card & typography reveal complete at ~1.8s
+        setTimeout(() => {
+          isFullyOpened = true;
+          isAnimating = false;
+          envelopeScreen.classList.add('invitation-revealed');
+
+          if (openBtn) {
+            const btnText = openBtn.querySelector('.btn-text') || openBtn.querySelector('span');
+            if (btnText) {
+              btnText.textContent = '📜 लग्नसोहळ्यात प्रवेश करा (Enter Website) ↓';
+            }
+            openBtn.classList.add('pulse-enter');
+          }
+          if (replayBtn) {
+            replayBtn.style.display = 'inline-flex';
+          }
+        }, 1800);
+      }, 220);
+    }
+
+    function enterWebsite() {
+      envelopeScreen.classList.add('fading-out');
       setTimeout(() => {
         envelopeScreen.classList.add('dismissed');
-        const hero = document.getElementById('hero');
+        const hero = document.getElementById('hero') || document.getElementById('scratch');
         if (hero) {
           hero.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 2900);
+      }, 700);
     }
 
-    // Click triggers
-    waxSeal.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openEnvelope(false);
-    });
+    function resetEnvelope() {
+      isAnimating = false;
+      isFullyOpened = false;
+      envelopeScreen.style.display = 'flex';
+      void envelopeScreen.offsetWidth; // force reflow
+      envelopeScreen.classList.remove('opened', 'seal-pressed', 'invitation-revealed', 'fading-out', 'dismissed');
+
+      if (openBtn) {
+        const btnText = openBtn.querySelector('.btn-text') || openBtn.querySelector('span');
+        if (btnText) {
+          btnText.textContent = '✨ निमंत्रण उघडा (Open Invitation)';
+        }
+        openBtn.classList.remove('pulse-enter');
+      }
+      if (replayBtn) {
+        replayBtn.style.display = 'none';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Click & Keyboard triggers
+    if (waxSeal) {
+      waxSeal.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openEnvelope(false);
+      });
+      waxSeal.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openEnvelope(false);
+        }
+      });
+    }
 
     if (envelopeCard) {
-      envelopeCard.addEventListener('click', () => openEnvelope(false));
+      envelopeCard.addEventListener('click', () => {
+        if (!isFullyOpened) {
+          openEnvelope(false);
+        } else {
+          enterWebsite();
+        }
+      });
+      envelopeCard.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (!isFullyOpened) openEnvelope(false);
+          else enterWebsite();
+        }
+      });
     }
 
     if (openBtn) {
-      openBtn.addEventListener('click', () => openEnvelope(false));
+      openBtn.addEventListener('click', () => {
+        if (!isFullyOpened) {
+          openEnvelope(false);
+        } else {
+          enterWebsite();
+        }
+      });
     }
 
     if (skipBtn) {
       skipBtn.addEventListener('click', () => openEnvelope(true));
     }
 
-    // Scroll-to-open gesture (so guests are never stuck on the envelope screen!)
-    let touchStartY = 0;
+    if (replayBtn) {
+      replayBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        resetEnvelope();
+      });
+    }
+
+    if (navReplayBtn) {
+      navReplayBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        resetEnvelope();
+      });
+    }
+
+    if (mobileReplayBtn) {
+      mobileReplayBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const mobileMenu = document.getElementById('mobileMenu');
+        const hamburger = document.getElementById('hamburgerBtn');
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+          mobileMenu.classList.remove('active');
+        }
+        if (hamburger) {
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+        resetEnvelope();
+      });
+    }
+
+    // Scroll & touch gestures
     window.addEventListener('wheel', (e) => {
-      if (e.deltaY > 15 && !envelopeScreen.classList.contains('opened')) {
-        openEnvelope(true);
+      if (e.deltaY > 20 && !envelopeScreen.classList.contains('dismissed')) {
+        if (!envelopeScreen.classList.contains('opened')) {
+          openEnvelope(false);
+        } else if (isFullyOpened) {
+          enterWebsite();
+        }
       }
     }, { passive: true });
 
+    let touchStartY = 0;
     window.addEventListener('touchstart', (e) => {
       touchStartY = e.touches[0].clientY;
     }, { passive: true });
 
     window.addEventListener('touchmove', (e) => {
-      if (!envelopeScreen.classList.contains('opened')) {
+      if (!envelopeScreen.classList.contains('dismissed')) {
         const delta = touchStartY - e.touches[0].clientY;
-        if (delta > 30) {
-          openEnvelope(true);
+        if (delta > 35) {
+          if (!envelopeScreen.classList.contains('opened')) {
+            openEnvelope(false);
+          } else if (isFullyOpened) {
+            enterWebsite();
+          }
         }
       }
     }, { passive: true });
 
     window.addEventListener('keydown', (e) => {
-      if ((e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') && !envelopeScreen.classList.contains('opened')) {
-        openEnvelope(true);
+      if ((e.key === 'ArrowDown' || e.key === 'PageDown') && !envelopeScreen.classList.contains('dismissed')) {
+        if (!envelopeScreen.classList.contains('opened')) {
+          openEnvelope(false);
+        } else if (isFullyOpened) {
+          enterWebsite();
+        }
       }
     });
-
-    // Replay Envelope button in Navbar
-    const replayBtn = document.getElementById('replayEnvelopeNavBtn');
-    if (replayBtn) {
-      replayBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        envelopeScreen.style.display = 'flex';
-        // Force reflow
-        void envelopeScreen.offsetWidth;
-        envelopeScreen.classList.remove('opened', 'fading-out', 'dismissed');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
   }
 
   // ---------------------------------------------------------------------------

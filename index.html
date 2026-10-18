@@ -56,6 +56,9 @@
   <!-- ====================================================================
        1. 3D ROYAL MARATHA ENVELOPE OVERLAY (TAP TO OPEN EXPERIENCE)
        ==================================================================== -->
+  <!-- ====================================================================
+       1. 3D ROYAL MARATHA ENVELOPE OVERLAY (TAP TO OPEN EXPERIENCE)
+       ==================================================================== -->
   <div id="royalEnvelopeScreen" class="envelope-screen" aria-modal="true" role="dialog" aria-label="Wedding Invitation Envelope">
     <div class="envelope-ambient"></div>
 
@@ -67,40 +70,83 @@
     <!-- Royal Stage Triptych (Full-width Desktop Display with Zero Empty Gaps) -->
     <div class="royal-stage-triptych">
       <!-- Left: The Bride Card (Visible on Desktop) -->
-      <aside class="royal-side-profile-card">
+      <aside class="royal-side-profile-card bride-card">
         <div class="royal-side-arch">
-          <img src="images/bride.jpg" alt="Akanksha Kadam - The Bride" class="royal-side-img" style="object-position: center 25%;">
+          <div class="arch-frame-trim"></div>
+          <img src="images/bride.jpg" alt="Akanksha Kadam - The Bride" class="royal-side-img" style="object-position: center 46%;">
         </div>
-        <span class="royal-side-role" style="color: #D4AF37; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.1em;">॥ वधू · THE BRIDE ॥</span>
+        <span class="royal-side-role">॥ वधू · THE BRIDE ॥</span>
         <h3 class="royal-side-name-marathi">Akanksha Kadam</h3>
         <p class="royal-side-desc">चि.सौ.कां. आकांक्षा अरविंद कदम<br>घराचा आधार, मायेची सावली आणि संस्कारांची मूर्ती!</p>
       </aside>
 
       <!-- Center: 3D Royal Wax Seal Envelope -->
       <div class="envelope-3d-box">
-        <div class="envelope-card" id="envelopeCardClickable" role="button" tabindex="0" aria-label="Open Wedding Invitation Envelope">
-          <!-- Back Interior Wall -->
-          <div class="envelope-back"></div>
-
-          <!-- Inner Royal Letter (Tucked inside pocket) -->
-          <div class="envelope-letter">
-            <p class="letter-monogram">कदम 卐 शिंदे</p>
-            <p class="letter-shloka">॥ श्री गणेशाय नमः ॥ · ॥ शुभविवाह सोहळा ॥</p>
-            <h2 class="letter-names">Akanksha<br>&amp;<br>Vikas</h2>
-            <p class="letter-date">26 NOVEMBER 2026 · 01:05 PM</p>
-            <p style="font-family: 'Noto Serif Devanagari', serif; font-size: 0.78rem; color: #666; margin-top: 0.2rem;">मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड</p>
+        <div class="envelope-card" id="envelopeCardClickable" role="button" tabindex="0" aria-label="उघडा · Open Wedding Invitation Envelope">
+          <!-- 1. Back Interior Wall with Luxury Lining -->
+          <div class="envelope-back">
+            <div class="envelope-interior-lining"></div>
           </div>
 
-          <!-- Ethereal Golden Glow Beam on Flap Unfold -->
+          <!-- 2. Inner Royal Letter (Tucked inside pocket until opened) -->
+          <div class="envelope-letter" id="envelopeLetterCard">
+            <div class="letter-inner-border">
+              <span class="corner-ornament top-left" aria-hidden="true">✦</span>
+              <span class="corner-ornament top-right" aria-hidden="true">✦</span>
+              <span class="corner-ornament bottom-left" aria-hidden="true">✦</span>
+              <span class="corner-ornament bottom-right" aria-hidden="true">✦</span>
+
+              <p class="letter-shloka">॥ श्री गणेशाय नमः ॥ · ॥ श्री कुलदैवत प्रसन्न ॥</p>
+
+              <div class="letter-monogram-badge">
+                <span class="badge-family">कदम</span>
+                <span class="badge-symbol">卐</span>
+                <span class="badge-family">शिंदे</span>
+              </div>
+
+              <p class="letter-ceremony-title">॥ शुभविवाह सोहळा ॥</p>
+
+              <div class="letter-names-group">
+                <h2 class="letter-names">
+                  <span class="name-bride">Akanksha</span>
+                  <span class="names-amp">&amp;</span>
+                  <span class="name-groom">Vikas</span>
+                </h2>
+                <p class="letter-marathi-names">चि.सौ.कां. आकांक्षा अरविंद कदम &amp; चि. विकास शहाजी शिंदे</p>
+              </div>
+
+              <div class="letter-divider-gold"><span>❦</span></div>
+
+              <div class="letter-datetime-box">
+                <p class="letter-date-marathi">गुरुवार, २६ नोव्हेंबर २०२६</p>
+                <p class="letter-muhurat-time">शुभ मुहूर्त दुपारी ०१:०५ वाजता</p>
+                <p class="letter-tithi">कार्तिक कृष्ण द्वितीया शके १९४८</p>
+              </div>
+
+              <p class="letter-venue-location">
+                <strong>विवाह स्थळ:</strong> मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड
+              </p>
+            </div>
+          </div>
+
+          <!-- 3. Ethereal Golden Glow Beam on Flap Unfold -->
           <div class="envelope-glow-beam" aria-hidden="true"></div>
 
-          <!-- Physical Front Pocket (Covers bottom 65% of letter completely) -->
-          <div class="envelope-pocket-front"></div>
+          <!-- 4. Front Envelope Pocket (Covers bottom & sides of letter) -->
+          <div class="envelope-pocket">
+            <div class="pocket-face"></div>
+            <div class="pocket-rim-trim"></div>
+          </div>
 
-          <!-- 3D Top Triangular Flap (Folds down from top) -->
-          <div class="envelope-flap"></div>
+          <!-- 5. 3D Top Flap (Hinged at top edge Y=0, folds down over pocket) -->
+          <div class="envelope-flap" id="envelopeFlap">
+            <div class="flap-outer">
+              <div class="flap-outer-trim"></div>
+            </div>
+            <div class="flap-inner"></div>
+          </div>
 
-          <!-- 3D Gold Wax Seal Stamp (Seals flap to pocket) -->
+          <!-- 6. 3D Gold Wax Seal Stamp (Seals flap to pocket) -->
           <div id="waxSealBtn" class="wax-seal-wrapper" role="button" tabindex="0" aria-label="उघडा - Tap to open invitation">
             <div class="wax-seal">
               <div class="wax-seal-inner-ring">
@@ -108,17 +154,20 @@
                 <span class="wax-seal-names">कदम 卐 शिंदे</span>
               </div>
             </div>
-            <div class="wax-seal-tap-hint">उघडा · TAP TO OPEN</div>
+            <div class="wax-seal-tap-hint">
+              <span>उघडा · TAP TO OPEN</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Right: The Groom Card (Visible on Desktop) -->
-      <aside class="royal-side-profile-card">
+      <aside class="royal-side-profile-card groom-card">
         <div class="royal-side-arch">
-          <img src="images/groom.jpg" alt="Vikas Shinde - The Groom" class="royal-side-img" style="object-position: center 20%;">
+          <div class="arch-frame-trim"></div>
+          <img src="images/groom.jpg" alt="Vikas Shinde - The Groom" class="royal-side-img" style="object-position: center 44%;">
         </div>
-        <span class="royal-side-role" style="color: #D4AF37; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.1em;">॥ वर · THE GROOM ॥</span>
+        <span class="royal-side-role">॥ वर · THE GROOM ॥</span>
         <h3 class="royal-side-name-marathi">Vikas Shinde</h3>
         <p class="royal-side-desc">चि. विकास शहाजी शिंदे<br>सर्वांचा लाडका, हसरा आणि विश्वासाची भक्कम साथ!</p>
       </aside>
@@ -127,10 +176,13 @@
     <!-- Prominent Bottom Action Bar (Clear & Unmissable Navigation) -->
     <div class="envelope-bottom-bar">
       <button type="button" id="openInvitationBtn" class="btn-royal-open" aria-label="Open wedding invitation envelope">
-        <span>✨ निमंत्रण उघडा (OPEN INVITATION)</span>
+        <span class="btn-text">✨ निमंत्रण उघडा (Open Invitation)</span>
       </button>
       <button type="button" id="skipEnvelopeBtn" class="btn-royal-explore" aria-label="Explore full wedding website directly">
-        <span>📜 संपूर्ण पत्रिका पहा (Explore Full Website) ↓</span>
+        <span>📜 संपूर्ण पत्रिका पहा (Explore Website) ↓</span>
+      </button>
+      <button type="button" id="replayEnvelopeBtn" class="btn-royal-replay" aria-label="पुन्हा पहा - Replay Envelope Animation" style="display: none;">
+        <span>↺ पुन्हा पहा (Replay)</span>
       </button>
     </div>
   </div>
@@ -140,18 +192,8 @@
     <source src="audio/violin-tune-ek-aisa-woh-jahan-tha.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Floating Audio / Soundwave Toggle Button -->
-  <button type="button" id="audioToggleBtn" class="audio-controller-btn" aria-label="संगीत चालू / बंद करा" title="Violin Theme · Ek Aisa Woh Jahan Tha">
-    <div class="soundwave-bars">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <span>संगीत (Music)</span>
-  </button>
-
   <!-- 2. Navigation -->
-  <nav aria-label="Main Navigation">
+  <nav aria-label="Main Navigation" class="site-nav">
     <!-- Left: Monogram Brand -->
     <a href="#hero" class="nav-logo" aria-label="Akanksha and Vikas Wedding Home">A &amp; V</a>
 
@@ -166,12 +208,29 @@
       <li><a href="#" id="replayEnvelopeNavBtn" style="color: #D4AF37; font-weight: 600;">✉️ पाकीट (Envelope)</a></li>
     </ul>
 
-    <!-- Mobile Hamburger Button -->
-    <button type="button" class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <!-- Right Header Actions (Audio Controller + Mobile Hamburger) -->
+    <div class="nav-header-actions">
+      <!-- Music Toggle Button (Playing: animated soundwaves, Paused: speaker with mute slash) -->
+      <button type="button" id="audioToggleBtn" class="audio-controller-btn paused" aria-label="संगीत चालू करा (Play Music)" title="Violin Theme · Ek Aisa Woh Jahan Tha">
+        <div class="soundwave-bars" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <!-- Crisply rendered SVG speaker with mute slash for stopped state -->
+        <svg class="audio-muted-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27l4.73 4.73H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+        <span class="audio-btn-label">संगीत (Music)</span>
+      </button>
+
+      <!-- Mobile Hamburger Button -->
+      <button type="button" class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </nav>
 
   <!-- Mobile Full-Screen Overlay Menu -->
@@ -184,6 +243,7 @@
         <li><a href="#story">स्नेहगाथा (Our Story)</a></li>
         <li><a href="#travel">स्थळ (Venue &amp; Travel)</a></li>
         <li><a href="#rsvp">उपस्थिती (RSVP)</a></li>
+        <li><a href="#" id="replayEnvelopeMobileBtn" style="color: #D4AF37; font-weight: 600;">✉️ लग्नपत्रिका पुन्हा उघडा (Envelope)</a></li>
       </ul>
       <div class="mobile-menu-footer">
         <p class="mobile-menu-date">26 · 11 · 2026</p>
@@ -253,27 +313,27 @@
               <span class="meta-val highlight-gold">01:05 PM IST</span>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Interactive Slide Switcher / Timeline Pills -->
-      <div class="hero-slide-controls" id="heroSlideControls" aria-label="Hero photo switcher">
-        <button type="button" class="hero-dot active" data-slide="0" aria-label="Photo 1: Sunset Romance">
-          <span class="dot-index">01</span>
-          <span class="dot-title">Sunset</span>
-        </button>
-        <button type="button" class="hero-dot" data-slide="1" aria-label="Photo 2: Romantic Bougainvillea">
-          <span class="dot-index">02</span>
-          <span class="dot-title">Bloom</span>
-        </button>
-        <button type="button" class="hero-dot" data-slide="2" aria-label="Photo 3: Royal Paithani">
-          <span class="dot-index">03</span>
-          <span class="dot-title">Paithani</span>
-        </button>
-        <button type="button" class="hero-dot" data-slide="3" aria-label="Photo 4: Candid Bike Ride">
-          <span class="dot-index">04</span>
-          <span class="dot-title">Candid</span>
-        </button>
+          <!-- Interactive Slide Switcher / Timeline Pills (Flows naturally below capsule) -->
+          <div class="hero-slide-controls" id="heroSlideControls" aria-label="Hero photo switcher">
+            <button type="button" class="hero-dot active" data-slide="0" aria-label="Photo 1: Sunset Romance">
+              <span class="dot-index">01</span>
+              <span class="dot-title">Sunset</span>
+            </button>
+            <button type="button" class="hero-dot" data-slide="1" aria-label="Photo 2: Romantic Bougainvillea">
+              <span class="dot-index">02</span>
+              <span class="dot-title">Bloom</span>
+            </button>
+            <button type="button" class="hero-dot" data-slide="2" aria-label="Photo 3: Royal Paithani">
+              <span class="dot-index">03</span>
+              <span class="dot-title">Paithani</span>
+            </button>
+            <button type="button" class="hero-dot" data-slide="3" aria-label="Photo 4: Candid Bike Ride">
+              <span class="dot-index">04</span>
+              <span class="dot-title">Candid</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- Subtle Animated Scroll Indicator -->

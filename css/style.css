@@ -421,20 +421,11 @@ nav.scrolled {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--ink) url('../images/hero.jpg') center 25% / cover no-repeat;
+  background: #0E050A;
 }
 
 #hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(23, 20, 15, 0.45) 0%,
-    rgba(23, 20, 15, 0.25) 40%,
-    rgba(23, 20, 15, 0.8) 100%
-  );
-  z-index: 1;
+  display: none !important;
 }
 
 .hero-content {
