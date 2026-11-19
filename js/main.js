@@ -1150,6 +1150,11 @@
     initBackToTop();
     initGalleryLightbox();
     initRsvpRadioToggle();
+    initHeroNameAnim();
+    initStoryLightbox();
+    initVolumeSlider();
+    initGoldParticles();
+    initPageLoadedFade();
 
     window.addEventListener('resize', debounce(handleResize, 250));
   }
@@ -1309,6 +1314,210 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
     revealEls.forEach(function (el) { observer.observe(el); });
+  }
+
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Phase 4: Hero Name Cinematic Entrance
+  // ─────────────────────────────────────────────────────────────────────────
+  function initHeroNameAnim() {
+    var wrap = document.querySelector('.hero-names-wrap');
+    if (!wrap || prefersReducedMotion) return;
+    var inner1 = wrap.querySelector('.hero-name-groom .name-inner');
+    var inner2 = wrap.querySelector('.hero-name-bride .name-inner');
+    if (!inner1 && !inner2) return;
+
+    function triggerReveal() {
+      wrap.classList.add('hero-names-revealed');
+    }
+
+    if (typeof gsap !== 'undefined') {
+      gsap.set([inner1, inner2].filter(Boolean), { y: '105%', opacity: 0 });
+      gsap.to([inner1, inner2].filter(Boolean), {
+        y: '0%',
+        opacity: 1,
+        duration: 1.1,
+        stagger: 0.18,
+        ease: 'power4.out',
+        delay: 0.3,
+        clearProps: 'transform,opacity',
+      });
+    } else {
+      setTimeout(triggerReveal, 400);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Phase 7: Story Image Lightbox
+  // ─────────────────────────────────────────────────────────────────────────
+  function initStoryLightbox() {
+    var lightbox = document.getElementById('galleryLightbox');
+    var lbImg    = document.getElementById('lightboxImg');
+    var lbCaption = document.getElementById('lightboxCaption');
+    var lbClose  = document.getElementById('lightboxClose');
+    var lbPrev   = document.getElementById('lightboxPrev');
+    var lbNext   = document.getElementById('lightboxNext');
+    if (!lightbox || !lbImg) return;
+
+    var storyImgs = Array.from(document.querySelectorAll('.story-card .story-img'));
+    if (!storyImgs.length) return;
+
+    var currentIdx = 0;
+
+    function openStory(index) {
+      currentIdx = index;
+      var img = storyImgs[index];
+      lbImg.src = img.src || img.getAttribute('data-src') || '';
+      lbImg.alt = img.alt || '';
+      var card = img.closest('.story-card');
+      var cap = card ? card.querySelector('.story-year, .story-title, .story-desc') : null;
+      var yearEl = card ? card.querySelector('.story-year-badge, .story-year') : null;
+      var titleEl = card ? card.querySelector('.story-title') : null;
+      var capText = '';
+      if (yearEl) capText += yearEl.textContent.trim() + '  ';
+      if (titleEl) capText += titleEl.textContent.trim();
+      lbCaption.textContent = capText || (img.alt || '');
+      lightbox.style.display = 'flex';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          lightbox.classList.add('active');
+        });
+      });
+      document.body.style.overflow = 'hidden';
+      if (lenisInstance) lenisInstance.stop();
+    }
+
+    function closeStory() {
+      lightbox.classList.remove('active');
+      setTimeout(function () { lightbox.style.display = 'none'; }, 320);
+      document.body.style.overflow = '';
+      if (lenisInstance) lenisInstance.start();
+    }
+
+    storyImgs.forEach(function (img, i) {
+      img.addEventListener('click', function () { openStory(i); });
+    });
+
+    // Reuse existing close/prev/next — but patch prev/next to cycle story imgs
+    // We store a reference to know if lightbox was opened from story or gallery
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeStory();
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Phase 13: Volume Slider
+  // ─────────────────────────────────────────────────────────────────────────
+  function initVolumeSlider() {
+    var slider = document.getElementById('volumeSlider');
+    if (!slider) return;
+
+    // Try to hook into WeddingAudioEngine on royal-interactive
+    function applyVolume(val) {
+      // Direct audio element approach
+      var audios = document.querySelectorAll('audio');
+      audios.forEach(function (a) { a.volume = parseFloat(val); });
+      // Also try global weddingAudio object if available
+      if (window.weddingAudio && window.weddingAudio.externalAudio) {
+        window.weddingAudio.externalAudio.volume = parseFloat(val);
+      }
+      if (window.weddingAudio && typeof window.weddingAudio.setVolume === 'function') {
+        window.weddingAudio.setVolume(parseFloat(val));
+      }
+    }
+
+    slider.addEventListener('input', function () {
+      applyVolume(this.value);
+    });
+
+    // Set initial volume after short delay (audio might not be ready)
+    setTimeout(function () { applyVolume(slider.value); }, 1000);
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Phase 14: Gold Particle Canvas
+  // ─────────────────────────────────────────────────────────────────────────
+  function initGoldParticles() {
+    // Desktop only (pointer: fine = mouse)
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    if (prefersReducedMotion) return;
+
+    var canvas = document.getElementById('goldParticlesCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+
+    var W, H;
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    var PARTICLE_COUNT = 28;
+    var particles = [];
+
+    function rand(min, max) { return Math.random() * (max - min) + min; }
+
+    function createParticle() {
+      return {
+        x: rand(0, W),
+        y: rand(H * 0.2, H),
+        r: rand(1, 3.5),
+        alpha: rand(0.08, 0.4),
+        vx: rand(-0.3, 0.3),
+        vy: rand(-0.6, -0.15),
+        pulse: rand(0, Math.PI * 2),
+        pulseSpeed: rand(0.008, 0.025),
+        color: Math.random() > 0.5 ? '#D4AF37' : '#F5D876',
+      };
+    }
+
+    for (var i = 0; i < PARTICLE_COUNT; i++) particles.push(createParticle());
+
+    var rafId;
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(function (p) {
+        p.pulse += p.pulseSpeed;
+        var alpha = p.alpha * (0.6 + 0.4 * Math.sin(p.pulse));
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.y < -20 || p.x < -20 || p.x > W + 20) {
+          p.x = rand(0, W);
+          p.y = H + 10;
+        }
+      });
+      rafId = requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    // Pause when page is hidden
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else {
+        draw();
+      }
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Phase 14: Page Loaded Body Fade-in
+  // ─────────────────────────────────────────────────────────────────────────
+  function initPageLoadedFade() {
+    document.body.classList.add('page-loaded');
   }
 
 

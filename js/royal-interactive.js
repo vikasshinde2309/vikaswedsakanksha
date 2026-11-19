@@ -190,9 +190,22 @@
         }
       }
     }
+
+    setVolume(vol) {
+      this.targetVolume = Math.max(0, Math.min(1, vol));
+      if (this.externalAudio && this.isPlaying) {
+        this.externalAudio.volume = this.targetVolume;
+      }
+    }
   }
 
   const weddingAudio = new WeddingAudioEngine();
+
+  // Phase 13: Wire volume slider
+  (function wireVol() {
+    var vs = document.getElementById("volumeSlider");
+    if (vs) vs.addEventListener("input", function () { weddingAudio.setVolume(parseFloat(this.value)); });
+  })();
 
   // ---------------------------------------------------------------------------
   // 2. 3D Wax Seal Envelope Opening Animation
@@ -294,6 +307,11 @@
         envelopeScreen.classList.add('dismissed');
         if (typeof ScrollTrigger !== 'undefined') {
           ScrollTrigger.refresh();
+        }
+        // Phase 3: Cinematic hero reveal animation
+        const mainContent = document.getElementById('main-content');
+        if (mainContent) {
+          mainContent.classList.add('hero-cinematic-reveal');
         }
         const hero = document.getElementById('hero') || document.getElementById('couple');
         if (hero) {
