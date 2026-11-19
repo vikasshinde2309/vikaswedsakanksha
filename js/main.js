@@ -1,6 +1,6 @@
 /**
  * ==========================================================================
- * Bespoke Wedding Website Experience — Akanksha & Vikas
+ * Bespoke Wedding Website Experience — Vikas & Akanksha
  * High-End Animations: GSAP 3.12.5 + ScrollTrigger + Lenis 1.1.18
  * ==========================================================================
  */
@@ -794,7 +794,7 @@
         const attendanceBadgeText = isAccepting ? 'सहर्ष स्वीकार · Joyfully Accepted' : 'क्षमस्व · Regretfully Declined';
         const attendanceBadgeColor = isAccepting ? '#2E7D32' : '#C2185B';
 
-        const whatsappText = `॥ श्री गणेशाय नमः ॥\n\nआकांक्षा आणि विकास यांच्या शुभविवाहासाठी माझी उपस्थिती नोंदवली आहे.\n\nनाव: ${name}\nउपस्थिती: ${attendanceBadgeText}\nपाहुण्यांची संख्या: ${guests}\nटीप / सदिच्छा: ${dietary || 'मनःपूर्वक शुभेच्छा!'}\n\n📍 विवाह स्थळ: मु. वाणी, रोहा, जि. रायगड\n#AkankshaWedsVikas #26Nov2026`;
+        const whatsappText = `॥ श्री गणेशाय नमः ॥\n\nविकास आणि आकांक्षा यांच्या शुभविवाहासाठी माझी उपस्थिती नोंदवली आहे.\n\nनाव: ${name}\nउपस्थिती: ${attendanceBadgeText}\nपाहुण्यांची संख्या: ${guests}\nटीप / सदिच्छा: ${dietary || 'मनःपूर्वक शुभेच्छा!'}\n\n📍 विवाह स्थळ: मु. वाणी, रोहा, जि. रायगड\n#VikasWedsAkanksha #ShindeKadamVivah #26Nov2026`;
         const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappText)}`;
 
         const thankYouMessage = document.createElement('div');
@@ -896,14 +896,14 @@
       btn.addEventListener('click', (e) => {
         e.preventDefault();
 
-        // Event: "Wedding of Akanksha & Vikas (Kadam & Shinde)"
+        // Event: "Wedding of Vikas & Akanksha (Shinde & Kadam)"
         // Date: November 26, 2026, 1:05 PM IST (UTC+05:30 -> 07:35 UTC)
         // Duration: 5 hours (Ends 6:05 PM IST -> 12:35 UTC)
         // Location: Vivah Sthal, Vani, Post Pingode, Taluka Roha, District Raigad, Maharashtra 402109
         const icsContent = [
           'BEGIN:VCALENDAR',
           'VERSION:2.0',
-          'PRODID:-//Wedding of Akanksha & Vikas (Kadam & Shinde)//EN',
+          'PRODID:-//Wedding of Vikas & Akanksha (Shinde & Kadam)//EN',
           'CALSCALE:GREGORIAN',
           'METHOD:PUBLISH',
           'BEGIN:VEVENT',
@@ -911,8 +911,8 @@
           'DTSTAMP:20261017T070000Z',
           'DTSTART:20261126T073500Z',
           'DTEND:20261126T123500Z',
-          'SUMMARY:Wedding of Akanksha & Vikas (Kadam & Shinde)',
-          'DESCRIPTION:Shubh Vivah (Wedding Ceremony) of Akanksha Arvind Kadam and Vikas Shahaji Shinde. Auspicious Muhurat at 1:05 PM.',
+          'SUMMARY:Wedding of Vikas & Akanksha (Shinde & Kadam)',
+          'DESCRIPTION:Shubh Vivah (Wedding Ceremony) of Vikas Shahaji Shinde and Akanksha Arvind Kadam. Auspicious Muhurat at 1:05 PM.',
           'LOCATION:Vivah Sthal\\, Vani\\, Post Pingode\\, Taluka Roha\\, District Raigad\\, Maharashtra 402109',
           'STATUS:CONFIRMED',
           'SEQUENCE:0',
@@ -924,7 +924,7 @@
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'wedding-akanksha-and-vikas.ics');
+        link.setAttribute('download', 'wedding-vikas-and-akanksha.ics');
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

@@ -1,4 +1,4 @@
-# 💍 Akanksha & Vikas — Royal Wedding Website
+# 💍 Vikas & Akanksha — Royal Wedding Website
 > **Date:** Thursday, 26th November 2026 (कार्तिक कृष्ण द्वितीया शके १९४८)  
 > **Auspicious Muhurat:** 01:05 PM in the Afternoon  
 > **Venue:** Vivah Sthal, At Post Vani, Pingode, Taluka Roha, Raigad, Maharashtra  

@@ -775,7 +775,7 @@
         const guestName = rsvpNameInput && rsvpNameInput.value.trim() ? rsvpNameInput.value.trim() : 'स्नेहीजन';
         const guestWish = rsvpMessageInput && rsvpMessageInput.value.trim() ? rsvpMessageInput.value.trim() : 'आपणा दोघांना भावी वैवाहिक जीवनासाठी मनःपूर्वक शुभेच्छा व शुभाशीर्वाद!';
 
-        const text = `॥ श्री गणेशाय नमः ॥\n\nआकांक्षा आणि विकास यांच्या शुभविवाहासाठी हार्दिक शुभेच्छा!\n\n${guestWish}\n\nशुभेच्छुक:\n${guestName}\n\n📍 विवाह स्थळ थेट लोकेशन (Google Maps):\nhttps://maps.app.goo.gl/3ZooWCqM5zvsbTBv8\n\n#AkankshaWedsVikas #26Nov2026`;
+        const text = `॥ श्री गणेशाय नमः ॥\n\nविकास आणि आकांक्षा यांच्या शुभविवाहासाठी हार्दिक शुभेच्छा!\n\n${guestWish}\n\nशुभेच्छुक:\n${guestName}\n\n📍 विवाह स्थळ थेट लोकेशन (Google Maps):\nhttps://maps.app.goo.gl/3ZooWCqM5zvsbTBv8\n\n#VikasWedsAkanksha #ShindeKadamVivah #26Nov2026`;
         const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
         window.open(url, '_blank');
       });
@@ -787,9 +787,9 @@
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         const calUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-          '&text=' + encodeURIComponent('Akanksha Arvind Kadam & Vikas Shahaji Shinde — Shubh Vivah') +
+          '&text=' + encodeURIComponent('Vikas Shahaji Shinde & Akanksha Arvind Kadam — Shubh Vivah') +
           '&dates=20261126T073500Z/20261126T120000Z' +
-          '&details=' + encodeURIComponent('॥ शुभविवाह सोहळा ॥\nचि.सौ.कां. आकांक्षा आणि चि. विकास यांचा शुभविवाह मुहूर्त दुपारी १:०५ वाजता.\nस्थळ: विवाह स्थळ, मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड.\n\n📍 थेट Google Maps लोकेशन:\nhttps://maps.app.goo.gl/3ZooWCqM5zvsbTBv8') +
+          '&details=' + encodeURIComponent('॥ शुभविवाह सोहळा ॥\nचि. विकास आणि चि.सौ.कां. आकांक्षा यांचा शुभविवाह मुहूर्त दुपारी १:०५ वाजता.\nस्थळ: विवाह स्थळ, मु. वाणी, पो. पिंगोडे, ता. रोहा, जि. रायगड.\n\n📍 थेट Google Maps लोकेशन:\nhttps://maps.app.goo.gl/3ZooWCqM5zvsbTBv8') +
           '&location=' + encodeURIComponent('Vivah Sthal, Vani, Pingode, Roha, Raigad (https://maps.app.goo.gl/3ZooWCqM5zvsbTBv8)');
         window.open(calUrl, '_blank');
       });
