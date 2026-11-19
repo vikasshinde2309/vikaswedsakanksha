@@ -237,27 +237,33 @@ nav.scrolled {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-light);
-  padding: 1.1rem 3rem;
+  padding: 1.1rem clamp(1.5rem, 3.5vw, 3rem);
 }
 
 .nav-logo {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  font-variant: small-caps;
-  letter-spacing: 0.1em;
-  color: var(--ink);
+  font-family: 'Cormorant Garamond', 'Cinzel', serif;
+  font-size: 1.55rem;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   text-decoration: none;
-  font-weight: 500;
-  transition: opacity 0.3s ease;
+  background: linear-gradient(135deg, #3C1620 0%, #8B1E3F 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  margin-right: clamp(1.5rem, 2.5vw, 2.8rem);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .nav-logo:hover {
-  opacity: 0.7;
+  transform: scale(1.04);
+  opacity: 0.85;
 }
 
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: clamp(1.1rem, 1.6vw, 2.2rem);
   list-style: none;
   align-items: center;
   margin: 0;
@@ -855,11 +861,13 @@ nav.scrolled {
 }
 
 .profile-photo.bride-photo {
-  object-position: center 25%;
+  object-position: center 46%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .profile-photo.groom-photo {
-  object-position: center 20%;
+  object-position: center 40%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .couple-profile-card:hover .profile-photo {
@@ -1139,37 +1147,37 @@ nav.scrolled {
   transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-/* Editorial subtle staggered tilts */
+/* Editorial subtle staggered tilts — overridden by Mumbai photo enhancements below */
 .gallery-item:nth-child(1) .gallery-img {
-  transform: rotate(-1.5deg);
+  transform: rotate(0deg);
 }
 
 .gallery-item:nth-child(2) .gallery-img {
-  transform: rotate(1deg);
+  transform: rotate(0deg);
 }
 
 .gallery-item:nth-child(3) .gallery-img {
-  transform: rotate(-2deg);
+  transform: rotate(0deg);
 }
 
 .gallery-item:nth-child(4) .gallery-img {
-  transform: rotate(1.5deg);
+  transform: rotate(0deg);
 }
 
 .gallery-item:nth-child(5) .gallery-img {
-  transform: rotate(-1deg);
+  transform: rotate(0deg);
 }
 
 .gallery-item:nth-child(6) .gallery-img {
-  transform: rotate(2deg);
+  transform: rotate(0deg);
 }
 
 .gallery-item:nth-child(7) .gallery-img {
-  transform: rotate(-1.5deg);
+  transform: rotate(0deg);
 }
 
 .gallery-item:nth-child(8) .gallery-img {
-  transform: rotate(1.2deg);
+  transform: rotate(0deg);
 }
 
 .gallery-item:hover .gallery-img {
@@ -1177,17 +1185,7 @@ nav.scrolled {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
-.gallery-caption {
-  font-family: var(--font-handwritten);
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  color: var(--white);
-  font-size: 1.1rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-  pointer-events: none;
-  z-index: 2;
-}
+/* Legacy .gallery-caption replaced by modern overlay rules below */
 
 /* --------------------------------------------------------------------------
    9. The Ceremonies Section (#details)
@@ -1959,7 +1957,8 @@ footer h2 {
   }
 }
 
-.reveal.active {
+.reveal.active,
+.reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -2315,6 +2314,325 @@ footer h2 {
     grid-template-columns: 1fr;
     max-width: 520px;
     gap: 1.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mumbai Pre-Wedding Photo Enhancements & Cinematic Gallery Animations
+   -------------------------------------------------------------------------- */
+
+/* --- Gallery Grid Layout (Editorial Magazine Dense Packing) --- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: dense;
+  gap: 1.75rem;
+  padding: 0 clamp(1rem, 4vw, 3.5rem);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Base Gallery Item */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  background: #18080E;
+  box-shadow: 0 10px 30px rgba(26, 11, 16, 0.12);
+  aspect-ratio: 4 / 5;
+  isolation: isolate;
+  cursor: pointer;
+  transform: translateY(0);
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease;
+}
+
+/* Gold Inset Luxury Border */
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.7;
+  transition: opacity 0.4s ease, border-color 0.4s ease, inset 0.4s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-8px) scale(1.015);
+  border-color: rgba(212, 175, 55, 0.85);
+  box-shadow: 0 20px 48px rgba(60, 22, 32, 0.25), 0 0 24px rgba(212, 175, 55, 0.22);
+  z-index: 5;
+}
+
+.gallery-item:hover::after {
+  opacity: 1;
+  border-color: rgba(212, 175, 55, 0.9);
+  inset: 6px;
+}
+
+/* Gallery Images: Object Positions for All 9 Mumbai Photos */
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.06);
+}
+
+.gallery-item:nth-child(1) .gallery-img { object-position: center center; }
+.gallery-item:nth-child(2) .gallery-img { object-position: center 15%; }
+.gallery-item:nth-child(3) .gallery-img { object-position: center 25%; }
+.gallery-item:nth-child(4) .gallery-img { object-position: center 35%; }
+.gallery-item:nth-child(5) .gallery-img { object-position: center center; }
+.gallery-item:nth-child(6) .gallery-img { object-position: center 25%; }
+.gallery-item:nth-child(7) .gallery-img { object-position: center center; }
+.gallery-item:nth-child(8) .gallery-img { object-position: center 25%; }
+.gallery-item:nth-child(9) .gallery-img { object-position: center 30%; }
+
+/* Grid Spanning Features */
+.gallery-item--tall {
+  grid-row: span 2;
+  aspect-ratio: 4 / 8.2;
+}
+
+.gallery-item--wide {
+  grid-column: span 2;
+  aspect-ratio: 16 / 9.5;
+}
+
+/* Luxury Scrim & Vignette Overlay */
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 1.5rem 1.35rem 1.25rem;
+  background: linear-gradient(
+    to top,
+    rgba(20, 8, 12, 0.95) 0%,
+    rgba(20, 8, 12, 0.65) 35%,
+    rgba(20, 8, 12, 0.15) 55%,
+    rgba(20, 8, 12, 0) 75%
+  );
+  z-index: 4;
+  pointer-events: none;
+  transition: background 0.4s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(20, 8, 12, 0.98) 0%,
+    rgba(20, 8, 12, 0.75) 40%,
+    rgba(20, 8, 12, 0.2) 62%,
+    rgba(20, 8, 12, 0) 80%
+  );
+}
+
+/* Devanagari Gold Tag Badge */
+.gallery-tag {
+  position: static !important;
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-devanagari);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #F8E29E;
+  background: rgba(60, 22, 32, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.75);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.26rem 0.75rem;
+  border-radius: 999px;
+  margin: 0 0 0.5rem 0 !important;
+  line-height: 1.3;
+  transform: none !important;
+  opacity: 1 !important;
+  z-index: 5;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.gallery-item:hover .gallery-tag {
+  background: rgba(90, 28, 46, 0.95);
+  border-color: #F3DC87;
+  color: #FFF6DD;
+}
+
+/* Caption Typography - Flowing directly under the badge */
+.gallery-caption {
+  position: static !important;
+  inset: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  display: block !important;
+  width: 100%;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.35;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
+  transform: none !important;
+  opacity: 1 !important;
+  z-index: 5;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+  color: #FFF5D8;
+}
+
+/* --- Hero Ken Burns Enhancement --- */
+@keyframes kenBurns-zoom {
+  0%   { transform: scale(1) translate(0, 0); }
+  50%  { transform: scale(1.05) translate(-0.8%, -0.8%); }
+  100% { transform: scale(1.08) translate(-1.2%, -1.2%); }
+}
+
+@keyframes kenBurns-pan {
+  0%   { transform: scale(1.04) translate(0, 0); }
+  50%  { transform: scale(1.08) translate(1%, -0.6%); }
+  100% { transform: scale(1.1) translate(1.6%, -1%); }
+}
+
+.hero-slide.active {
+  animation: kenBurns-zoom 12s ease-in-out forwards;
+}
+
+.hero-slide:nth-child(2).active,
+.hero-slide:nth-child(4).active {
+  animation: kenBurns-pan 12s ease-in-out forwards;
+}
+
+/* --- Couple Section Profile Framing --- */
+.bride-photo {
+  object-position: center 46%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.groom-photo {
+  object-position: center 40%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.couple-profile-card:hover .bride-photo,
+.couple-profile-card:hover .groom-photo {
+  object-position: center 40%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Envelope Triptych Side Cards (Desktop) */
+.bride-card .royal-side-img {
+  object-position: center 46%;
+}
+
+.groom-card .royal-side-img {
+  object-position: center 44%;
+}
+
+/* --- Story Section: Mumbai Photo Positioning & Warm Elegance --- */
+.story-card:nth-child(1) .story-img { object-position: center 25%; }
+.story-card:nth-child(2) .story-img { object-position: center 15%; }
+.story-card:nth-child(3) .story-img { object-position: center center; }
+.story-card:nth-child(4) .story-img { object-position: center 25%; }
+.story-card:nth-child(5) .story-img { object-position: center 15%; }
+.story-card:nth-child(6) .story-img { object-position: center center; }
+
+.story-card {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+}
+
+.story-card:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 16px 36px rgba(60, 22, 32, 0.22), 0 0 18px rgba(212, 175, 55, 0.2);
+}
+
+/* --- Responsive Layout for Gallery Across Viewports --- */
+@media (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.35rem;
+    padding: 0 1.5rem;
+  }
+  .gallery-item--wide {
+    grid-column: span 2;
+    aspect-ratio: 16 / 9.5;
+  }
+  .gallery-item--tall {
+    grid-row: span 1;
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    width: 100%;
+    padding: 0 1rem;
+    gap: 1.35rem;
+  }
+  .gallery-item,
+  .gallery-item--wide,
+  .gallery-item--tall {
+    grid-column: span 1;
+    grid-row: span 1;
+    aspect-ratio: 4 / 5;
+    border-radius: 12px;
+  }
+  .gallery-overlay {
+    padding: 1.25rem 1rem 1rem;
+  }
+  .gallery-caption {
+    font-size: 0.96rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .gallery-grid {
+    padding: 0 0.65rem;
+    gap: 1.1rem;
+  }
+  .gallery-item {
+    border-radius: 10px;
+  }
+  .gallery-item::after {
+    inset: 5px;
+  }
+  .gallery-caption {
+    font-size: 0.88rem;
+  }
+}
+
+/* --- Reduced Motion Accessibility Support --- */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item,
+  .gallery-img,
+  .gallery-tag,
+  .gallery-caption,
+  .story-card,
+  .hero-slide {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
   }
 }
 
